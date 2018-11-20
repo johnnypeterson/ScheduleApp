@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="243.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduleapp.view.LoginController">
+<AnchorPane prefHeight="243.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduleapp.view.LoginController">
    <children>
       <GridPane hgap="5.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -25,15 +25,15 @@
             <RowConstraints maxHeight="98.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label styleClass="label-title" text="%userLogin" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" />
-            <Label text="%userNameLabel" GridPane.rowIndex="1" />
-            <Label text="%passwordLabel" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="titleLabel" styleClass="label-title" text="%userLogin" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" />
+            <Label fx:id="usernameLabel" text="%userNameLabel" GridPane.rowIndex="1" />
+            <Label fx:id="passwordLabel" text="%passwordLabel" GridPane.rowIndex="2" />
+            <TextField fx:id="usernameText" promptText="usernameTexField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <PasswordField fx:id="passwordText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <ButtonBar buttonOrder="UIY_NCOA+" GridPane.columnSpan="2147483647" GridPane.rowIndex="3">
               <buttons>
-                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="%cancelButton" />
-                <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="%loginButton" />
+                  <Button fx:id="cancelButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancel" text="%cancelButton" />
+                <Button fx:id="loginButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#login" text="%loginButton" />
               </buttons>
             </ButtonBar>
          </children>
