@@ -31,7 +31,8 @@
             <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/FXMLDocumentController.java</file>
             <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/model/Appointment.java</file>
             <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/util/DataBase.java</file>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/view/AppointmentEditScreenController.java</file>
+            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/AppointmentScreen.java</file>
+            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/ScheduleApp.java</file>
             <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/view/LoginController.java</file>
         </group>
     </open-files>
