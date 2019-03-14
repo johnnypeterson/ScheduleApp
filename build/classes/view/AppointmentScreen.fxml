@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="528.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="528.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AppointmentScreen">
    <children>
       <TableView fx:id="aptTableView" layoutY="70.0" prefHeight="395.0" prefWidth="600.0" AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
         <columns>
@@ -28,12 +28,13 @@
       </ButtonBar>
       <RadioButton layoutX="310.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleWeek" text="Week" />
       <RadioButton layoutX="310.0" layoutY="37.0" mnemonicParsing="false" onAction="#handleMonth" text="Month" />
-      <ButtonBar layoutX="263.0" layoutY="474.0" prefHeight="40.0" prefWidth="297.0">
+      <ButtonBar layoutX="263.0" layoutY="474.0" prefHeight="40.0" prefWidth="297.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="40.0">
         <buttons>
           <Button mnemonicParsing="false" onAction="#handleReports" text="Reports" />
             <Button mnemonicParsing="false" onAction="#handleCustomer" text="Customer" />
             <Button mnemonicParsing="false" onAction="#handleLogOut" text="Log Out" />
         </buttons>
       </ButtonBar>
+      <ButtonBar layoutX="92.0" layoutY="474.0" prefHeight="40.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

@@ -13,11 +13,26 @@ public class User {
     private String userName;
     private String password;
     private Integer active;
+    private Integer userId;
+  
 
-    public User(String userName, String password, Integer active) {
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+  
+    public User() {
+        
+    }
+
+    public User(String userName, String password, Integer active, Integer userId) {
         this.userName = userName;
         this.password = password;
         this.active = active;
+        this.userId = userId;
     }
 
     public String getUserName() {

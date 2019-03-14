@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package scheduleapp.util;
+package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -34,13 +34,13 @@ public class DataBase {
     }
     
     //Returns Connection
-    public static Connection getConn(){
+    public static Connection getConnection(){
     
         return connDB;
     }
     
     //Closes connections
-    public static void closeConn(){
+    public static void closeConnection(){
         try{
             connDB.close();
         }catch (Exception e){
@@ -50,5 +50,6 @@ public class DataBase {
             System.out.println("Connection closed.");
         }
     }
+    
     
 }

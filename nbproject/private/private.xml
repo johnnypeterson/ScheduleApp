@@ -18,22 +18,11 @@
             <file>file:/Users/johnnypeterson/NetBeansProjects/ScheduleApp/src/scheduleapp/model/Appointment.java</file>
         </group>
         <group>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/model/Customer.java</file>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/model/City.java</file>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/view/AppointmentScreen.java</file>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/view/Customer.fxml</file>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/view/AppointmentEditScreen.fxml</file>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/model/Address.java</file>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/util/populateDB.sql</file>
             <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/view/LoginScreen.fxml</file>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/model/User.java</file>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/view/CustomerController.java</file>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/FXMLDocumentController.java</file>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/model/Appointment.java</file>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/util/DataBase.java</file>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/AppointmentScreen.java</file>
+            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/resources/login_en.properties</file>
+            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/view/LoginScreenController.java</file>
+            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/resources/login.properties</file>
             <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/ScheduleApp.java</file>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/view/LoginController.java</file>
         </group>
     </open-files>
 </project-private>
