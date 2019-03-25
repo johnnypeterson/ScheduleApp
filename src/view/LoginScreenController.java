@@ -9,6 +9,7 @@ package view;
  *
  * @author johnnypeterson
  */
+import com.mysql.jdbc.Statement;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -34,8 +35,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import scheduleapp.ScheduleApp;
-import scheduleapp.model.User;
+import model.User;
 import util.DataBase;
+import static util.DataBase.conn;
 
 public class LoginScreenController implements Initializable {
 
@@ -62,10 +64,12 @@ public class LoginScreenController implements Initializable {
 
     @FXML
     void cancel(ActionEvent event) {
+     
          Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Cancel");
         alert.setContentText("Are you sure you want to close the program");
-        alert.showAndWait()
+        
+          alert.showAndWait()
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent((ButtonType response) -> {
                             Platform.exit();
@@ -76,13 +80,13 @@ public class LoginScreenController implements Initializable {
     }
     private ScheduleApp mainApp;
     @FXML
-    void login(ActionEvent event) {
-//               String username = usernameText.getText();
-//        String password = passwordText.getText();
-//        if(username.length() > 0 && password.length() > 0) {
-//            User activeUser = validateLogin(username, password);
-//            System.out.println("This worked" + activeUser.toString());
-//        }
+    void login(ActionEvent event) throws ClassNotFoundException, SQLException {
+               String username = usernameText.getText();
+        String password = passwordText.getText();
+        if(username.length() > 0 && password.length() > 0) {
+            User activeUser = validLogin(username, password);
+            System.out.println("This worked" + activeUser.toString());
+        }
     Parent root;
         try {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("view/AppointmentScreen.fxml"));
@@ -125,23 +129,38 @@ public class LoginScreenController implements Initializable {
 
     }
     
-    User validateLogin(String username, String password) {
-        try{
-            PreparedStatement pst = DataBase.getConnection().prepareStatement("SELECT * FROM user WHERE userName= AND password=?");
-            pst.setString(1, username);
-            pst.setString(2, password);
-            ResultSet rs = pst.executeQuery();
-            if(rs.next()){
-                user.setUserName(rs.getString("userName"));
-                user.setPassword(rs.getString("password"));
-                user.setUserId(rs.getInt("userId"));
-            } else {
-                return null;
-            }
-
-        } catch(SQLException e){
-            e.printStackTrace();
+    public User validLogin(String username, String password) throws ClassNotFoundException, SQLException {
+        String sqlStatement = "SELECT * FROM user WHERE userName=" + "'" + username + "'" + "AND password=" + "'" + password + "'";
+        System.out.println(sqlStatement);
+        Statement statment = (Statement) conn.createStatement();
+        ResultSet result = statment.executeQuery(sqlStatement);
+        if(result.next()) {
+            user.setUserName(result.getString("userName"));
+            user.setPassword(result.getString("password"));
+            user.setUserId(result.getInt("userId"));
+        } else {
+            return null;
         }
         return user;
     }
+    
+//    User validateLogin(String username, String password) throws ClassNotFoundException, SQLException {
+//        try{
+//            PreparedStatement pst = DataBase.makeConnection.prepareStatement("SELECT * FROM user WHERE userName= AND password=?");
+//            pst.setString(1, username);
+//            pst.setString(2, password);
+//            ResultSet rs = pst.executeQuery();
+//            if(rs.next()){
+//                user.setUserName(rs.getString("userName"));
+//                user.setPassword(rs.getString("password"));
+//                user.setUserId(rs.getInt("userId"));
+//            } else {
+//                return null;
+//            }
+//
+//        } catch(SQLException e){
+//            e.printStackTrace();
+//        }
+//        return user;
+//    }
 }

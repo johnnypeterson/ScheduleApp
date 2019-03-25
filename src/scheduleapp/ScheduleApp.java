@@ -7,8 +7,11 @@ package scheduleapp;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import util.DataBase;
 
 import view.LoginScreenController;
 
@@ -42,7 +46,14 @@ public class ScheduleApp extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+        try {
+            DataBase.makeConnection();
+                    launch(args);
+        DataBase.closeConnection();
+        }  catch (Exception ex) {
+            Logger.getLogger(ScheduleApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
     
     
@@ -52,7 +63,6 @@ public class ScheduleApp extends Application {
             Scene scene = new Scene(root);
 
             primaryStage.setScene(scene);
-            primaryStage.setAlwaysOnTop(true);
             primaryStage.show();
             
         } catch (IOException e) {
@@ -60,23 +70,5 @@ public class ScheduleApp extends Application {
         }
     }
     
-     public void showAppointmentScreen(ActionEvent event) {
- Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getClassLoader().getResource("view/AppointmentScreen.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("My New Stage Title");
-            stage.setScene(new Scene(root, 450, 450));
-            stage.show();
-            // Hide this current window (if this is what you want)
-            ((Node)(event.getSource())).getScene().getWindow().hide();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-     static Stage getStage() {
-        return primaryStage;
-    }
     
 }

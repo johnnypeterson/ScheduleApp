@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package scheduleapp.model;
+package model;
 
 /**
  *
@@ -19,6 +19,10 @@ public class Appointment {
     private String url;
     private String start;
     private String end;
+
+    public Appointment() {
+        
+    }
 
     @java.lang.Override
     public java.lang.String toString() {

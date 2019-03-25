@@ -1,4 +1,4 @@
-package scheduleapp.model;
+package model;
 
 /**
  *

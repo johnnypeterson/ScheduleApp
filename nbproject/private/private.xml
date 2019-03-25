@@ -18,10 +18,7 @@
             <file>file:/Users/johnnypeterson/NetBeansProjects/ScheduleApp/src/scheduleapp/model/Appointment.java</file>
         </group>
         <group>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/view/LoginScreen.fxml</file>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/resources/login_en.properties</file>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/view/LoginScreenController.java</file>
-            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/resources/login.properties</file>
+            <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/view/AppointmentScreen.java</file>
             <file>file:/Users/johnny.peterson/JavaSchool/ScheduleApp/src/scheduleapp/ScheduleApp.java</file>
         </group>
     </open-files>

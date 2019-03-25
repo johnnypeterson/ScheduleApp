@@ -28,7 +28,7 @@
             <Label fx:id="titleLabel" styleClass="label-title" text="userLogin" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" />
             <Label fx:id="usernameLabel" text="usernameLabel" GridPane.rowIndex="1" />
             <Label fx:id="passwordLabel" text="passwordLabel" GridPane.rowIndex="2" />
-            <TextField fx:id="usernameText" promptText="usernameTexField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="usernameText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <PasswordField fx:id="passwordText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <ButtonBar buttonOrder="UIY_NCOA+" GridPane.columnSpan="2147483647" GridPane.rowIndex="3">
               <buttons>

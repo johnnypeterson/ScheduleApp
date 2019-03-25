@@ -2,9 +2,14 @@
 package view;
 
 
+import com.mysql.jdbc.Statement;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +23,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import scheduleapp.model.User;
+import model.User;
+import model.Appointment;
+import static util.DataBase.conn;
 
 /**
  *
@@ -39,7 +46,7 @@ public class AppointmentScreen implements Initializable {
     private TableColumn<?, ?> endaptColumn;
 
     @FXML
-    private TableColumn<?, ?> titleColumn;
+    private TableColumn<Appointment, String> titleColumn;
 
     @FXML
     private TableColumn<?, ?> typeColumn;
@@ -49,6 +56,8 @@ public class AppointmentScreen implements Initializable {
 
     @FXML
     private TableColumn<?, ?> consultantColumn;
+    
+    Appointment appointment = new Appointment();
 
     @FXML
     void handleCustomer(ActionEvent event) {
@@ -61,7 +70,7 @@ public class AppointmentScreen implements Initializable {
             
             stage.show();
             // Hide this current window (if this is what you want)
-            ((Node)(event.getSource())).getScene().getWindow().hide();
+            ((Node)(event.getSource())).getScene().getWindow();
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -80,12 +89,12 @@ public class AppointmentScreen implements Initializable {
         try {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("view/AppointmentEditScreen.fxml"));
             Stage stage = new Stage();
-            stage.setTitle("Johnny Peterson Schedule App");
+            stage.setTitle("Edit - Johnny Peterson Schedule App");
             stage.setScene(new Scene(root, 800, 550));
             
             stage.show();
             // Hide this current window (if this is what you want)
-            ((Node)(event.getSource())).getScene().getWindow().hide();
+            ((Node)(event.getSource())).getScene().getWindow();
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -115,6 +124,20 @@ public class AppointmentScreen implements Initializable {
 
     @FXML
     void handleNew(ActionEvent event) {
+         Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("view/AppointmentEditScreen.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Add New -Johnny Peterson Schedule App");
+            stage.setScene(new Scene(root, 800, 550));
+            
+            stage.show();
+            // Hide this current window (if this is what you want)
+            ((Node)(event.getSource())).getScene().getWindow();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -130,7 +153,33 @@ public class AppointmentScreen implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        try {
+            setUpAppoitments();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(AppointmentScreen.class.getName()).log(Level.SEVERE, null, ex);
+    
+         }
         
+    }
+    
+    /**
+     *
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
+    public Appointment setUpAppoitments() throws ClassNotFoundException, SQLException {
+        String sqlStatement = "SELECT * FROM appointment;";
+        System.out.println(sqlStatement);
+        Statement statment = (Statement) conn.createStatement();
+        ResultSet result = statment.executeQuery(sqlStatement);
+        if(result.next()) {
+            appointment.setTitle(result.getString("title"));
+            System.out.println("this worked" + result.getString("title"));
+        } else {
+            return null;
+        }
+        return appointment;
     }
    
 

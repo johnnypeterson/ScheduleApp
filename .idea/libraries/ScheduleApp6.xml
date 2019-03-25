@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ScheduleApp6">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/ScheduleApp.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
