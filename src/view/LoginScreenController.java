@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,7 +38,9 @@ import javafx.stage.Stage;
 import scheduleapp.ScheduleApp;
 import model.User;
 import util.DataBase;
-import static util.DataBase.conn;
+
+import static util.DataBase.getConnection;
+
 
 public class LoginScreenController implements Initializable {
 
@@ -63,6 +66,10 @@ public class LoginScreenController implements Initializable {
     private Button loginButton;
 
     @FXML
+    private Label errorMessage;
+
+
+    @FXML
     void cancel(ActionEvent event) {
      
          Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -81,27 +88,30 @@ public class LoginScreenController implements Initializable {
     private ScheduleApp mainApp;
     @FXML
     void login(ActionEvent event) throws ClassNotFoundException, SQLException {
+        ResourceBundle resourcesBundle = ResourceBundle.getBundle("language/login");
                String username = usernameText.getText();
         String password = passwordText.getText();
         if(username.length() > 0 && password.length() > 0) {
             User activeUser = validLogin(username, password);
-            System.out.println("This worked" + activeUser.toString());
+            if (activeUser != null) {
+                Parent root;
+                try {
+                    root = FXMLLoader.load(getClass().getClassLoader().getResource("view/AppointmentScreen.fxml"));
+                    Stage stage = new Stage();
+                    stage.setTitle("Johnny Peterson Schedule App");
+                    stage.setScene(new Scene(root, 800, 550));
+
+                    stage.show();
+                    // Hide this current window (if this is what you want)
+                    ((Node) (event.getSource())).getScene().getWindow().hide();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                errorMessage.setText(resourcesBundle.getString("incorrect"));
+            }
+
         }
-    Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getClassLoader().getResource("view/AppointmentScreen.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Johnny Peterson Schedule App");
-            stage.setScene(new Scene(root, 800, 550));
-            
-            stage.show();
-            // Hide this current window (if this is what you want)
-            ((Node)(event.getSource())).getScene().getWindow().hide();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        
 
     }
     
@@ -132,8 +142,10 @@ public class LoginScreenController implements Initializable {
     public User validLogin(String username, String password) throws ClassNotFoundException, SQLException {
         String sqlStatement = "SELECT * FROM user WHERE userName=" + "'" + username + "'" + "AND password=" + "'" + password + "'";
         System.out.println(sqlStatement);
-        Statement statment = (Statement) conn.createStatement();
-        ResultSet result = statment.executeQuery(sqlStatement);
+        Connection connection = getConnection();
+        Statement statement;
+        statement = (Statement) connection.createStatement();
+        ResultSet result = statement.executeQuery(sqlStatement);
         if(result.next()) {
             user.setUserName(result.getString("userName"));
             user.setPassword(result.getString("password"));

@@ -5,12 +5,17 @@ package view;
 import com.mysql.jdbc.Statement;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,10 +27,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.User;
 import model.Appointment;
-import static util.DataBase.conn;
+import util.DataBase;
+
+
+import static util.DataBase.getConnection;
+import static util.DataBase.makeConnection;
 
 /**
  *
@@ -37,27 +46,27 @@ public class AppointmentScreen implements Initializable {
 
 
     @FXML
-    private TableView<?> aptTableView;
+    private TableView<Appointment> aptTableView;
 
     @FXML
-    private TableColumn<?, ?> startaptColumn;
+    private TableColumn<Appointment, LocalDateTime> startaptColumn;
 
     @FXML
-    private TableColumn<?, ?> endaptColumn;
+    private TableColumn<Appointment, LocalDateTime> endaptColumn;
 
     @FXML
     private TableColumn<Appointment, String> titleColumn;
 
     @FXML
-    private TableColumn<?, ?> typeColumn;
+    private TableColumn<Appointment, String> typeColumn;
 
     @FXML
-    private TableColumn<?, ?> customerColumn;
+    private TableColumn<Appointment, Integer> customerColumn;
 
     @FXML
-    private TableColumn<?, ?> consultantColumn;
+    private TableColumn<Appointment, String> consultantColumn;
     
-    Appointment appointment = new Appointment();
+
 
     @FXML
     void handleCustomer(ActionEvent event) {
@@ -80,7 +89,22 @@ public class AppointmentScreen implements Initializable {
 
     @FXML
     void handleDelete(ActionEvent event) {
+        Appointment selectedAppointment = aptTableView.getSelectionModel().getSelectedItem();
 
+        if(selectedAppointment != null) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Appointment");
+        alert.setHeaderText("Are you sure?");
+        alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> {deleteAppointment(selectedAppointment);
+            showAppointments();
+        });
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Nothing Selected");
+            alert.setContentText("Please select an Appointment in the Table to delete");
+            alert.showAndWait();
+
+        }
     }
 
     @FXML
@@ -154,8 +178,8 @@ public class AppointmentScreen implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            setUpAppoitments();
-        } catch (ClassNotFoundException | SQLException ex) {
+            showAppointments();
+        } catch (Exception ex) {
             Logger.getLogger(AppointmentScreen.class.getName()).log(Level.SEVERE, null, ex);
     
          }
@@ -168,18 +192,66 @@ public class AppointmentScreen implements Initializable {
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-    public Appointment setUpAppoitments() throws ClassNotFoundException, SQLException {
-        String sqlStatement = "SELECT * FROM appointment;";
+    public ObservableList<Appointment> getAppointmentList() {
+        ObservableList<Appointment> appointmentList = FXCollections.observableArrayList();
+        String sqlStatement = "SELECT * FROM appointment";
         System.out.println(sqlStatement);
-        Statement statment = (Statement) conn.createStatement();
-        ResultSet result = statment.executeQuery(sqlStatement);
-        if(result.next()) {
-            appointment.setTitle(result.getString("title"));
-            System.out.println("this worked" + result.getString("title"));
-        } else {
-            return null;
+        Statement statement;
+        Connection connection = getConnection();
+        try {
+            statement = (Statement) connection.createStatement();
+            ResultSet result = statement.executeQuery(sqlStatement);
+            Appointment appointment = null;
+            while (result.next()) {
+                appointment = new Appointment(result.getInt("appointmentId"),
+                        result.getInt("customerId"),
+                        result.getString("title"),
+                        result.getString("description"),
+                        result.getString("location"),
+                        result.getString("contact"),
+                        result.getString("url"),
+                        result.getString("start"),
+                        result.getString("end"));
+                appointmentList.add(appointment);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return appointment;
+        System.out.println(appointmentList);
+
+        return appointmentList;
+    }
+
+    public void showAppointments() {
+        ObservableList<Appointment> list = getAppointmentList();
+        
+        customerColumn.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("customerId"));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("title"));
+        consultantColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("contact"));
+        startaptColumn.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("start"));
+        endaptColumn.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("end"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("description"));
+        aptTableView.setItems(list);
+
+    }
+    private  void deleteAppointment (Appointment appointment) {
+        try {
+            String query = "Delete From appointment Where appointmentId="+appointment.getAppointmentId().toString();
+            executeQuery(query);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void executeQuery(String query) {
+        Connection conn = DataBase.getConnection();
+        java.sql.Statement st;
+        try {
+            st = conn.createStatement();
+            st.executeUpdate(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
    
 

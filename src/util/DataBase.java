@@ -22,7 +22,23 @@ public class DataBase {
     private static final String password = "53688060994";
     private static final String driver = "com.mysql.jdbc.Driver";
     
-    public static Connection conn;
+    private static Connection conn;
+    public DataBase(){}
+
+    public static void init() {
+        System.out.println("Connection to DB");
+    try {
+        Class.forName(driver);
+        conn = (Connection) DriverManager.getConnection(DB_URL, username, password);
+    } catch (Exception e) {
+        e.printStackTrace();
+        }
+    }
+
+    public static Connection getConnection() {
+        return conn;
+    }
+
     
     public static void makeConnection() throws ClassNotFoundException, SQLException {
         Class.forName(driver);
@@ -33,4 +49,6 @@ public class DataBase {
              conn.close();
              System.out.println("Connection Closed");
         }
+
+
 }
