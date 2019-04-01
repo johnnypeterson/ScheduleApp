@@ -5,11 +5,15 @@ package view;
 import com.mysql.jdbc.Statement;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +34,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
+import model.User;
 import util.DataBase;
 
 
@@ -66,6 +71,10 @@ public class AppointmentScreen implements Initializable {
     @FXML
     private TableColumn<Appointment, String> consultantColumn;
     
+    private User currentUser;
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
+    private final ZoneId zoneId = ZoneId.systemDefault();
+
 
 
     @FXML
@@ -110,18 +119,24 @@ public class AppointmentScreen implements Initializable {
     @FXML
     void handleEdit(ActionEvent event) {
          Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getClassLoader().getResource("view/AppointmentEditScreen.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Edit - Johnny Peterson Schedule App");
-            stage.setScene(new Scene(root, 800, 550));
-            
-            stage.show();
-            // Hide this current window (if this is what you want)
-            ((Node)(event.getSource())).getScene().getWindow();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
+        Appointment selectedAppointment = aptTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedAppointment != null) {
+            try {
+                root = FXMLLoader.load(getClass().getClassLoader().getResource("view/AppointmentEditScreen.fxml"));
+                Stage stage = new Stage();
+                stage.setTitle("Edit Appointment");
+                stage.setScene(new Scene(root, 800, 550));
+                stage.show();
+                ((Node) (event.getSource())).getScene().getWindow();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Nothing Selected");
+            alert.setContentText("Please select an Appointment in the Table to edit");
+            alert.showAndWait();
         }
 
     }
@@ -152,11 +167,10 @@ public class AppointmentScreen implements Initializable {
         try {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("view/AppointmentEditScreen.fxml"));
             Stage stage = new Stage();
-            stage.setTitle("Add New -Johnny Peterson Schedule App");
+            stage.setTitle("Add New Appointment");
             stage.setScene(new Scene(root, 800, 550));
             
             stage.show();
-            // Hide this current window (if this is what you want)
             ((Node)(event.getSource())).getScene().getWindow();
         }
         catch (IOException e) {
@@ -185,6 +199,13 @@ public class AppointmentScreen implements Initializable {
          }
         
     }
+
+    public String dateFormat(Timestamp timestamp) {
+
+        ZonedDateTime newzdtStart = timestamp.toLocalDateTime().atZone(ZoneId.of("UTC"));
+        ZonedDateTime newLocalStart = newzdtStart.withZoneSameInstant(zoneId);
+        return  newLocalStart.format(dateTimeFormatter);
+    }
     
     /**
      *
@@ -203,6 +224,9 @@ public class AppointmentScreen implements Initializable {
             ResultSet result = statement.executeQuery(sqlStatement);
             Appointment appointment = null;
             while (result.next()) {
+
+                String startTime = dateFormat(result.getTimestamp("start"));
+                String endTime = dateFormat(result.getTimestamp("end"));
                 appointment = new Appointment(result.getInt("appointmentId"),
                         result.getInt("customerId"),
                         result.getString("title"),
@@ -210,8 +234,9 @@ public class AppointmentScreen implements Initializable {
                         result.getString("location"),
                         result.getString("contact"),
                         result.getString("url"),
-                        result.getString("start"),
-                        result.getString("end"));
+                        startTime,
+                        endTime
+                        );
                 appointmentList.add(appointment);
             }
 
@@ -234,6 +259,8 @@ public class AppointmentScreen implements Initializable {
         typeColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("description"));
         aptTableView.setItems(list);
 
+
+
     }
     private  void deleteAppointment (Appointment appointment) {
         try {
@@ -252,6 +279,11 @@ public class AppointmentScreen implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setUser(User currentUser) {
+        this.currentUser = currentUser;
+
     }
    
 

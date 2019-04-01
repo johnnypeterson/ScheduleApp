@@ -10,8 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="view.AppointmentEditScreenController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AppointmentEditScreenController">
    <children>
       <TableView fx:id="customerTableView" layoutX="23.0" layoutY="229.0" prefHeight="148.0" prefWidth="554.0">
         <columns>
@@ -19,7 +18,6 @@
             <TableColumn fx:id="CustomerIdColumn" prefWidth="202.0" text="Customer Id" />
         </columns>
       </TableView>
-      <Label fx:id="appointmentTitle" layoutX="249.0" layoutY="6.0" prefHeight="17.0" prefWidth="110.0" text="Add Appointment" />
       <Label layoutX="56.0" layoutY="40.0" text="Title" />
       <Label layoutX="55.0" layoutY="116.0" text="Date" />
       <Label layoutX="55.0" layoutY="77.0" text="Type" />

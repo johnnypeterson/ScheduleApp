@@ -26,9 +26,6 @@ public class AppointmentEditScreenController implements Initializable {
     private TableColumn<?, ?> CustomerIdColumn;
 
     @FXML
-    private Label appointmentTitle;
-
-    @FXML
     private TextField titleTextField;
 
     @FXML
