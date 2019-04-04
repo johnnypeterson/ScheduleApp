@@ -253,8 +253,6 @@ public class AppointmentScreen implements Initializable {
                 appointmentList.add(appointment);
             }
 
-            
-
         } catch (Exception e) {
             e.printStackTrace();
         }

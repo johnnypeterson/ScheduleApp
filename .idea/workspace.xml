@@ -69,8 +69,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/AppointmentScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="255" column="12" selection-start-line="255" selection-start-column="12" selection-end-line="255" selection-end-column="12" />
+            <state relative-caret-position="485">
+              <caret line="253" column="13" selection-start-line="253" selection-start-column="13" selection-end-line="253" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3912#3931#0" expanded="true" />
@@ -284,7 +284,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554386181776" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554392894792" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -325,12 +325,12 @@
       <option name="presentableId" value="Default" />
       <updated>1553361937531</updated>
       <workItem from="1553361938808" duration="786000" />
-      <workItem from="1553608591386" duration="38057000" />
+      <workItem from="1553608591386" duration="38202000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38843000" />
+    <option name="totallyTimeSpent" value="38988000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="4247" y="-460" width="1690" height="1393" extended-state="0" />
@@ -581,8 +581,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/AppointmentScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="255" column="12" selection-start-line="255" selection-start-column="12" selection-end-line="255" selection-end-column="12" />
+        <state relative-caret-position="485">
+          <caret line="253" column="13" selection-start-line="253" selection-start-column="13" selection-end-line="253" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3912#3931#0" expanded="true" />
