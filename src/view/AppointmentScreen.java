@@ -263,7 +263,6 @@ public class AppointmentScreen implements Initializable {
 
     public void showAppointments() {
         ObservableList<Appointment> list = getAppointmentList();
-        
         customerColumn.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("customerId"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("title"));
         consultantColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("contact"));
