@@ -10,11 +10,17 @@ package view;
  * @author johnnypeterson
  */
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.chrono.ChronoZonedDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.FileHandler;
@@ -24,6 +30,7 @@ import java.util.logging.SimpleFormatter;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,6 +46,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.Appointment;
 import scheduleapp.ScheduleApp;
 import model.User;
 import util.DataBase;
@@ -75,6 +83,7 @@ public class LoginScreenController implements Initializable {
 
     private static Stage primaryStage;
     private static final Logger loginLogger = Logger.getLogger(LoginLogger.class.getName());
+    private ObservableList<Appointment> remindersList;
 
 
     @FXML
@@ -108,17 +117,38 @@ public class LoginScreenController implements Initializable {
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                 loginLogger.log(Level.INFO, userName +" Successful Login at " + timestamp);
 
-                Parent root;
+                if (remindersList != null) {
+                    String title = remindersList.get(0).getTitle();
+                    String time = remindersList.get(0).getStart();
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Upcomming Appointments");
+                    alert.setContentText("You have an uppcomming apt " + title + " at " + time);
+
+                    alert.showAndWait()
+                            .filter(response -> response == ButtonType.OK)
+                            .ifPresent((ButtonType response) -> {
+                                        Platform.exit();
+                                        System.exit(0);
+                                    }
+                            );
+
+                }
+
                 try {
 
-
-                    root = FXMLLoader.load(getClass().getClassLoader().getResource("view/AppointmentScreen.fxml"));
                     Stage stage = new Stage();
-                    stage.setTitle("Johnny Peterson Schedule App");
-                    stage.setScene(new Scene(root, 800, 550));
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/AppointmentScreen.fxml"));
 
+                    Parent sceneMain = loader.load();
+                    AppointmentScreen controller = loader.<AppointmentScreen>getController();
+                    controller.setUser(activeUser);
+
+                    Scene scene = new Scene(sceneMain);
+                    stage.setScene(scene);
+                    stage.setTitle("Johnny Peterson Schedule App");
                     stage.show();
                     ((Node) (event.getSource())).getScene().getWindow().hide();
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -139,6 +169,7 @@ public class LoginScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setLogin(mainApp);
+
 
     }
 
@@ -169,8 +200,38 @@ public class LoginScreenController implements Initializable {
         } else {
             return null;
         }
+        getReminderApt();
         return user;
     }
+
+    private void getReminderApt() {
+        LocalDateTime currentTime = LocalDateTime.now();
+        LocalDateTime currentTimePlusFifteen = currentTime.plusMinutes(15);
+        try {
+            PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
+                    "SELECT appointment.appointmentId, appointment.title, appointment.`start`, appointment.`end` FROM appointment, customer WHERE appointment.customerId = customer.customerId AND appointment.createdBy = ? ORDER BY `start`");
+            preparedStatement.setString(1, user.getUserName());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            System.out.println(resultSet);
+
+
+            while(resultSet.next()) {
+                Integer appointmentId = resultSet.getInt("appointment.appointmentId");
+                Timestamp startTime = resultSet.getTimestamp("appointment.start");
+                Timestamp endTime = resultSet.getTimestamp("appointment.end");
+                ZonedDateTime startZonedDateTime = startTime.toLocalDateTime().atZone(ZoneId.of("UTC"));
+                ZonedDateTime endZonedDateTime = endTime.toLocalDateTime().atZone(ZoneId.of("UTC"));
+                String title = resultSet.getString("appointment.title");
+
+                if (startTime.after(Timestamp.valueOf(currentTime.minusMinutes(1))) && endTime.before(Timestamp.valueOf(currentTimePlusFifteen))) {
+                    this.remindersList.add(new Appointment(appointmentId, title, startZonedDateTime.toString(), endZonedDateTime.toString()));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     
 
 }

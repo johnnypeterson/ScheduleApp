@@ -3,6 +3,8 @@ package view;
 
 
 import com.mysql.jdbc.Statement;
+
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
@@ -77,14 +79,15 @@ public class AppointmentScreen implements Initializable {
 
 
 
+
     @FXML
     void handleCustomer(ActionEvent event) {
          Parent root;
         try {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Customer.fxml"));
             Stage stage = new Stage();
-            stage.setTitle("Johnny Peterson Schedule App");
-            stage.setScene(new Scene(root, 800, 550));
+            stage.setTitle("Customer");
+            stage.setScene(new Scene(root, 750, 550));
             
             stage.show();
             // Hide this current window (if this is what you want)
@@ -118,17 +121,25 @@ public class AppointmentScreen implements Initializable {
 
     @FXML
     void handleEdit(ActionEvent event) {
-         Parent root;
-        Appointment selectedAppointment = aptTableView.getSelectionModel().getSelectedItem();
+      Appointment selectedAppointment = aptTableView.getSelectionModel().getSelectedItem();
 
         if (selectedAppointment != null) {
             try {
-                root = FXMLLoader.load(getClass().getClassLoader().getResource("view/AppointmentEditScreen.fxml"));
                 Stage stage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/AppointmentEditScreen.fxml"));
+                Parent sceneMain = loader.load();
+                AppointmentEditScreenController controller = loader.<AppointmentEditScreenController>getController();
+                controller.setAppointment(selectedAppointment);
+
+                Scene scene = new Scene(sceneMain);
+                stage.setScene(scene);
+                controller.setAppointment(selectedAppointment);
                 stage.setTitle("Edit Appointment");
-                stage.setScene(new Scene(root, 800, 550));
                 stage.show();
                 ((Node) (event.getSource())).getScene().getWindow();
+
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -143,7 +154,8 @@ public class AppointmentScreen implements Initializable {
 
     @FXML
     void handleLogOut(ActionEvent event) {
-         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Cancel");
         alert.setContentText("Are you sure you want to close the program");
         alert.showAndWait()
@@ -197,6 +209,7 @@ public class AppointmentScreen implements Initializable {
             Logger.getLogger(AppointmentScreen.class.getName()).log(Level.SEVERE, null, ex);
     
          }
+
         
     }
 

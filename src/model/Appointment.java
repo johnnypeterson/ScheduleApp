@@ -50,6 +50,12 @@ public class Appointment {
         this.start = start;
         this.end = end;
     }
+    public Appointment(Integer appointmentId, String title, String start, String end) {
+        this.appointmentId = appointmentId;
+        this.title = title;
+        this.start = start;
+        this.end = end;
+    }
 
     public Integer getAppointmentId() {
         return appointmentId;

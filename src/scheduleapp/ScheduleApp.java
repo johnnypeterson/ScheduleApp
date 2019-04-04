@@ -52,6 +52,7 @@ public class ScheduleApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         showLoginScreen();
+
     
     }
 
@@ -67,6 +68,7 @@ public class ScheduleApp extends Application {
             Logger.getLogger(ScheduleApp.class.getName()).log(Level.SEVERE, null, ex);
         }
         LoginLogger.init();
+
 
     }
     
