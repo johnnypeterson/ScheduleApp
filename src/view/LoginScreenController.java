@@ -17,12 +17,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.chrono.ChronoZonedDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,6 +53,7 @@ import scheduleapp.ScheduleApp;
 import model.User;
 import util.DataBase;
 import util.LoginLogger;
+import java.util.Date;
 
 import static util.DataBase.getConnection;
 
@@ -205,12 +208,18 @@ public class LoginScreenController implements Initializable {
     }
 
     private void getReminderApt() {
-        LocalDateTime currentTime = LocalDateTime.now();
-        LocalDateTime currentTimePlusFifteen = currentTime.plusMinutes(15);
+
+
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        Timestamp currentTimePlusFifteen = new Timestamp(System.currentTimeMillis());
+        currentTimePlusFifteen.setTime(currentTimePlusFifteen.getTime() + (((14 * 60) + 59)* 1000));
+        System.out.println(currentTime);
+        System.out.println(currentTimePlusFifteen);
         try {
             PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
                     "SELECT appointment.appointmentId, appointment.title, appointment.`start`, appointment.`end` FROM appointment, customer WHERE appointment.customerId = customer.customerId AND appointment.createdBy = ? ORDER BY `start`");
             preparedStatement.setString(1, user.getUserName());
+            System.out.println(preparedStatement);
             ResultSet resultSet = preparedStatement.executeQuery();
             System.out.println(resultSet);
 
@@ -219,19 +228,27 @@ public class LoginScreenController implements Initializable {
                 Integer appointmentId = resultSet.getInt("appointment.appointmentId");
                 Timestamp startTime = resultSet.getTimestamp("appointment.start");
                 Timestamp endTime = resultSet.getTimestamp("appointment.end");
-                ZonedDateTime startZonedDateTime = startTime.toLocalDateTime().atZone(ZoneId.of("UTC"));
-                ZonedDateTime endZonedDateTime = endTime.toLocalDateTime().atZone(ZoneId.of("UTC"));
+//                ZonedDateTime startZonedDateTime = startTime.toLocalDateTime().atZone(ZoneId.of("UTC"));
+//                ZonedDateTime endZonedDateTime = endTime.toLocalDateTime().atZone(ZoneId.of("UTC"));
                 String title = resultSet.getString("appointment.title");
+//                currentTime.toLocalDateTime().atZone(ZoneId.of("UTC"));
+//                currentTimePlusFifteen.toLocalDateTime().atZone(ZoneId.of("UTC"));
 
-                if (startTime.after(Timestamp.valueOf(currentTime.minusMinutes(1))) && endTime.before(Timestamp.valueOf(currentTimePlusFifteen))) {
-                    this.remindersList.add(new Appointment(appointmentId, title, startZonedDateTime.toString(), endZonedDateTime.toString()));
+//                startTime.toLocalDateTime().atZone(ZoneId.of("MST"));
+//                endTime.toLocalDateTime().atZone(ZoneId.of("MST"));
+
+                if (startTime.after(currentTime) && endTime.before(currentTimePlusFifteen)) {
+                    Appointment appointment = new Appointment(appointmentId, title, startTime.toString(), endTime.toString());
+                    remindersList.add(appointment);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
     }
 
-    
+
 
 }

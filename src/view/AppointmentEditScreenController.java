@@ -84,7 +84,9 @@ public class AppointmentEditScreenController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         setTimes();
+
     }
 
 
@@ -92,6 +94,7 @@ public class AppointmentEditScreenController implements Initializable {
 
     public void setAppointment(Appointment currentAppointment) {
         this.currentAppointment = currentAppointment;
+        titleTextField.setText(currentAppointment.getTitle());
 
     }
 

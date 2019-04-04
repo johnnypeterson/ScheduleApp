@@ -129,7 +129,6 @@ public class AppointmentScreen implements Initializable {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/AppointmentEditScreen.fxml"));
                 Parent sceneMain = loader.load();
                 AppointmentEditScreenController controller = loader.<AppointmentEditScreenController>getController();
-                controller.setAppointment(selectedAppointment);
 
                 Scene scene = new Scene(sceneMain);
                 stage.setScene(scene);
