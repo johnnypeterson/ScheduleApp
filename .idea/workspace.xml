@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29d106f6-db13-4705-9a3d-c406a0e7381a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log-ins.txt.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ScheduleApp/util/LoginLogger.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ScheduleApp/util/LoginLogger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ScheduleApp/view/AppointmentEditScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ScheduleApp/view/AppointmentEditScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ScheduleApp/view/AppointmentEditScreenController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ScheduleApp/view/AppointmentEditScreenController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ScheduleApp/view/AppointmentScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ScheduleApp/view/AppointmentScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ScheduleApp/view/Customer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ScheduleApp/view/Customer.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ScheduleApp/view/CustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ScheduleApp/view/CustomerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ScheduleApp/view/LoginScreenController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ScheduleApp/view/LoginScreenController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Appointment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scheduleapp/ScheduleApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scheduleapp/ScheduleApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/LoginLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/LoginLogger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/AppointmentEditScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentEditScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/AppointmentEditScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentEditScreenController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/AppointmentScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/Customer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Customer.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginScreenController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -68,13 +51,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="fxml" value="10" />
-          <entry key="java" value="5261" />
+          <entry key="java" value="5263" />
           <entry key="properties" value="81" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="5261" />
+          <entry key="JAVA" value="5263" />
           <entry key="Properties" value="81" />
           <entry key="XML" value="10" />
         </counts>
@@ -86,8 +69,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/AppointmentScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="250" column="30" selection-start-line="250" selection-start-column="30" selection-end-line="250" selection-end-column="30" />
+            <state relative-caret-position="500">
+              <caret line="255" column="12" selection-start-line="255" selection-start-column="12" selection-end-line="255" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3912#3931#0" expanded="true" />
@@ -217,10 +200,10 @@
         <option value="$PROJECT_DIR$/src/view/CustomerController.java" />
         <option value="$PROJECT_DIR$/src/util/LoginLogger.java" />
         <option value="$PROJECT_DIR$/src/scheduleapp/ScheduleApp.java" />
-        <option value="$PROJECT_DIR$/src/view/AppointmentScreen.java" />
         <option value="$PROJECT_DIR$/src/view/AppointmentEditScreenController.java" />
         <option value="$PROJECT_DIR$/src/model/Appointment.java" />
         <option value="$PROJECT_DIR$/src/view/LoginScreenController.java" />
+        <option value="$PROJECT_DIR$/src/view/AppointmentScreen.java" />
       </list>
     </option>
   </component>
@@ -301,7 +284,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554374959276" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554386181776" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -342,12 +325,12 @@
       <option name="presentableId" value="Default" />
       <updated>1553361937531</updated>
       <workItem from="1553361938808" duration="786000" />
-      <workItem from="1553608591386" duration="37835000" />
+      <workItem from="1553608591386" duration="38057000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38621000" />
+    <option name="totallyTimeSpent" value="38843000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="4247" y="-460" width="1690" height="1393" extended-state="0" />
@@ -598,8 +581,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/AppointmentScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="250" column="30" selection-start-line="250" selection-start-column="30" selection-end-line="250" selection-end-column="30" />
+        <state relative-caret-position="500">
+          <caret line="255" column="12" selection-start-line="255" selection-start-column="12" selection-end-line="255" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3912#3931#0" expanded="true" />
