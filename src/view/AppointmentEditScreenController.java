@@ -2,14 +2,15 @@ package view;
 
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import com.mysql.jdbc.Statement;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,19 +18,22 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import model.Appointment;
-import model.User;
+import model.Customer;
+
+import static util.DataBase.getConnection;
 
 public class AppointmentEditScreenController implements Initializable {
 
     @FXML
-    private TableView<?> customerTableView;
+    private TableView<Customer> customerTableView;
 
     @FXML
-    private TableColumn<?, ?> CustomerNameColumn;
+    private TableColumn<Customer, String> customerNameColumn;
 
     @FXML
-    private TableColumn<?, ?> CustomerIdColumn;
+    private TableColumn<Customer, Integer> customerIdColumn;
 
     @FXML
     private TextField titleTextField;
@@ -53,12 +57,12 @@ public class AppointmentEditScreenController implements Initializable {
     private Button cancelButton;
 
     private Appointment currentAppointment;
+    private Customer customer;
     private final ObservableList<String> start = FXCollections.observableArrayList();
     private final ObservableList<String> end = FXCollections.observableArrayList();
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
     private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
     private final ZoneId zoneId = ZoneId.systemDefault();
-
 
 
     @FXML
@@ -81,20 +85,21 @@ public class AppointmentEditScreenController implements Initializable {
 
     }
 
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        showCustomers();
         setTimes();
 
+
     }
-
-
 
 
     public void setAppointment(Appointment currentAppointment) {
         this.currentAppointment = currentAppointment;
         titleTextField.setText(currentAppointment.getTitle());
+        typeTextField.setText(currentAppointment.getDescription());
+
 
     }
 
@@ -111,6 +116,40 @@ public class AppointmentEditScreenController implements Initializable {
         endComboBox.setItems(end);
     }
 
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
+    public ObservableList<Customer> getCustomerList() {
+        ObservableList<Customer> customerObservableListList = FXCollections.observableArrayList();
+        String sqlStatement = "SELECT * FROM customer";
+        Statement statement;
+        Connection connection = getConnection();
+        try {
+            statement = (Statement) connection.createStatement();
+            ResultSet result = statement.executeQuery(sqlStatement);
+            Customer customer = null;
+            while (result.next()) {
+                customer = new Customer(result.getInt("customerId"),
+                        result.getString("customerName"),
+                        result.getInt("addressId"),
+                        result.getInt("active")
+                );
+                customerObservableListList.add(customer);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return customerObservableListList;
+    }
+
+    public void showCustomers() {
+    ObservableList<Customer> list = getCustomerList();
+        customerNameColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("customerName"));
+        customerIdColumn.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("customerId"));
+        customerTableView.setItems(list);
+
+}
 
 }

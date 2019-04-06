@@ -14,8 +14,8 @@
    <children>
       <TableView fx:id="customerTableView" layoutX="23.0" layoutY="229.0" prefHeight="148.0" prefWidth="554.0">
         <columns>
-          <TableColumn fx:id="CustomerNameColumn" prefWidth="351.0" text="Customer Name" />
-            <TableColumn fx:id="CustomerIdColumn" prefWidth="202.0" text="Customer Id" />
+          <TableColumn fx:id="customerNameColumn" prefWidth="351.0" text="Customer Name" />
+            <TableColumn fx:id="customerIdColumn" prefWidth="202.0" text="Customer Id" />
         </columns>
       </TableView>
       <Label layoutX="56.0" layoutY="40.0" text="Title" />

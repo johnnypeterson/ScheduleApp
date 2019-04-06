@@ -3,7 +3,13 @@ package view;
 
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
+
+import com.mysql.jdbc.Statement;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,6 +18,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import model.Appointment;
+import model.Customer;
+
+import static util.DataBase.getConnection;
 
 /**
  * FXML Controller class
@@ -81,6 +91,7 @@ public class CustomerController implements Initializable {
     void handleSave(ActionEvent event) {
 
     }
+
 
 
 

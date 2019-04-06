@@ -74,6 +74,7 @@ public class AppointmentScreen implements Initializable {
     private TableColumn<Appointment, String> consultantColumn;
     
     private User currentUser;
+
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
     private final ZoneId zoneId = ZoneId.systemDefault();
 
@@ -294,6 +295,10 @@ public class AppointmentScreen implements Initializable {
 
     public void setUser(User currentUser) {
         this.currentUser = currentUser;
+
+    }
+
+    public void setCustomer() {
 
     }
    
