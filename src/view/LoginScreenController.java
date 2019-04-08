@@ -120,6 +120,7 @@ public class LoginScreenController implements Initializable {
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                 loginLogger.log(Level.INFO, userName +" Successful Login at " + timestamp);
 
+
                 if (remindersList != null) {
                     String title = remindersList.get(0).getTitle();
                     String time = remindersList.get(0).getStart();

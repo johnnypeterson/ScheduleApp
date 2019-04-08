@@ -150,6 +150,6 @@ public class AppointmentEditScreenController implements Initializable {
         customerIdColumn.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("customerId"));
         customerTableView.setItems(list);
 
-}
+    }
 
 }

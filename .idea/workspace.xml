@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29d106f6-db13-4705-9a3d-c406a0e7381a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/AppointmentEditScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentEditScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/LoginLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/LoginLogger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/AppointmentEditScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentEditScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/AppointmentScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginScreenController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,10 +31,10 @@
         <counts>
           <entry key="0" value="2" />
           <entry key="fxml" value="8" />
-          <entry key="java" value="19" />
+          <entry key="java" value="21" />
           <entry key="lck" value="2" />
           <entry key="md" value="1" />
-          <entry key="mf" value="1" />
+          <entry key="mf" value="2" />
           <entry key="properties" value="3" />
           <entry key="sql" value="1" />
           <entry key="txt" value="3" />
@@ -44,8 +42,8 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="19" />
-          <entry key="Manifest" value="1" />
+          <entry key="JAVA" value="21" />
+          <entry key="Manifest" value="2" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="7" />
           <entry key="Properties" value="3" />
@@ -56,13 +54,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="fxml" value="10" />
-          <entry key="java" value="6076" />
+          <entry key="java" value="6236" />
           <entry key="properties" value="81" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="6076" />
+          <entry key="JAVA" value="6236" />
           <entry key="Properties" value="81" />
           <entry key="XML" value="10" />
         </counts>
@@ -105,16 +103,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/AppointmentEditScreenController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="124" column="55" lean-forward="true" selection-start-line="124" selection-start-column="55" selection-end-line="124" selection-end-column="55" />
+            <state relative-caret-position="1887">
+              <caret line="152" column="4" selection-start-line="152" selection-start-column="4" selection-end-line="152" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3048#3049#0" expanded="true" />
                 <element signature="e#3088#3089#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/scheduleapp/ScheduleApp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="579">
+              <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
             </state>
           </provider>
         </entry>
@@ -131,29 +138,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/LoginScreenController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2512">
-              <caret line="241" column="28" selection-start-line="241" selection-start-column="28" selection-end-line="241" selection-end-column="28" />
+            <state relative-caret-position="270">
+              <caret line="87" column="32" selection-start-line="87" selection-start-column="32" selection-end-line="87" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/Appointment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="50" column="23" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24780">
-              <caret line="1772" selection-start-line="1772" selection-end-line="1772" />
             </state>
           </provider>
         </entry>
@@ -163,14 +152,21 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/LoginScreen.fxml">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/util/LoginLogger.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="42" column="15" selection-start-line="42" selection-start-column="15" selection-end-line="42" selection-end-column="15" />
+            <state relative-caret-position="270">
+              <caret line="18" selection-start-line="18" selection-end-line="18" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manifest.mf">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -200,13 +196,13 @@
         <option value="$PROJECT_DIR$/src/language/login_fr.properties" />
         <option value="$PROJECT_DIR$/src/util/DataBase.java" />
         <option value="$PROJECT_DIR$/src/view/Customer.fxml" />
-        <option value="$PROJECT_DIR$/src/util/LoginLogger.java" />
         <option value="$PROJECT_DIR$/src/scheduleapp/ScheduleApp.java" />
         <option value="$PROJECT_DIR$/src/model/Appointment.java" />
-        <option value="$PROJECT_DIR$/src/view/LoginScreenController.java" />
         <option value="$PROJECT_DIR$/src/view/AppointmentScreen.java" />
         <option value="$PROJECT_DIR$/src/view/CustomerController.java" />
         <option value="$PROJECT_DIR$/src/view/AppointmentEditScreenController.java" />
+        <option value="$PROJECT_DIR$/src/view/LoginScreenController.java" />
+        <option value="$PROJECT_DIR$/src/util/LoginLogger.java" />
       </list>
     </option>
   </component>
@@ -287,7 +283,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554570706587" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554688695900" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -329,18 +325,18 @@
       <updated>1553361937531</updated>
       <workItem from="1553361938808" duration="786000" />
       <workItem from="1553608591386" duration="43927000" />
-      <workItem from="1554410135360" duration="2372000" />
+      <workItem from="1554410135360" duration="5498000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47085000" />
+    <option name="totallyTimeSpent" value="50211000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-2506" y="-520" width="2266" height="1417" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1830036" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1830036" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -349,7 +345,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32932165" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32301888" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32301888" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39969254" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -397,7 +393,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/view/LoginScreenController.java</url>
-          <line>209</line>
+          <line>210</line>
           <properties class="view.LoginScreenController" method="getReminderApt">
             <option name="EMULATED" value="true" />
           </properties>
@@ -411,19 +407,19 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/view/LoginScreenController.java</url>
-          <line>239</line>
+          <line>240</line>
           <properties />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/view/LoginScreenController.java</url>
-          <line>241</line>
+          <line>242</line>
           <properties />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/view/LoginScreenController.java</url>
-          <line>212</line>
+          <line>213</line>
           <properties />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
@@ -464,9 +460,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manifest.mf">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/view/AppointmentScreen.fxml">
       <provider selected="true" editor-type-id="text-editor" />
       <provider editor-type-id="JavaFX-Scene-Builder" />
@@ -480,13 +473,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/LoginLogger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="1" lean-forward="true" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -506,13 +492,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scheduleapp/ScheduleApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="57" selection-start-line="57" selection-end-line="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/Appointment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="690">
@@ -527,9 +506,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/log-ins.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/view/LoginScreen.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
@@ -542,16 +518,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="94" selection-start-line="94" selection-end-line="94" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/LoginScreenController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2512">
-          <caret line="241" column="28" selection-start-line="241" selection-start-column="28" selection-end-line="241" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -585,12 +551,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/AppointmentEditScreenController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="124" column="55" lean-forward="true" selection-start-line="124" selection-start-column="55" selection-end-line="124" selection-end-column="55" />
+        <state relative-caret-position="1887">
+          <caret line="152" column="4" selection-start-line="152" selection-start-column="4" selection-end-line="152" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3048#3049#0" expanded="true" />
             <element signature="e#3088#3089#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manifest.mf">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scheduleapp/ScheduleApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="579">
+          <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/LoginScreenController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="87" column="32" selection-start-line="87" selection-start-column="32" selection-end-line="87" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/log-ins.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/LoginLogger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
