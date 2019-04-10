@@ -10,27 +10,15 @@ package view;
  * @author johnnypeterson
  */
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.chrono.ChronoZonedDateTime;
-import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.TimeZone;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -46,14 +34,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Appointment;
 import scheduleapp.ScheduleApp;
 import model.User;
 import util.DataBase;
-import util.LoginLogger;
-import java.util.Date;
 
 import static util.DataBase.getConnection;
 
@@ -85,7 +70,6 @@ public class LoginScreenController implements Initializable {
     private Label errorMessage;
 
     private static Stage primaryStage;
-    private static final Logger loginLogger = Logger.getLogger(LoginLogger.class.getName());
     private ObservableList<Appointment> remindersList;
 
 
@@ -105,6 +89,23 @@ public class LoginScreenController implements Initializable {
                 );
 
     }
+    private void loginLogger(User user) {
+        Logger log = Logger.getLogger("log-ins.txt");
+        log.setLevel(Level.INFO);
+        try {
+            FileHandler fileHandler = new FileHandler("log-ins.txt", true);
+            SimpleFormatter simpleFormatter = new SimpleFormatter();
+            fileHandler.setFormatter(simpleFormatter);
+            log.addHandler(fileHandler);
+        } catch (Exception e) {
+            Logger.getLogger(LoginScreenController.class.getName()).log(Level.SEVERE, null, e);
+        }
+        if (user != null) {
+            log.log(Level.INFO, "User " + user.getUserName() + " successfully logged in.");
+        } else {
+            log.log(Level.INFO, "Invalid UserName or Password.");
+        }
+    }
 
     private ScheduleApp mainApp;
     @FXML
@@ -116,10 +117,7 @@ public class LoginScreenController implements Initializable {
         if(username.length() > 0 && password.length() > 0) {
             User activeUser = validLogin(username, password);
             if (activeUser != null) {
-                String userName = activeUser.getUserName();
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                loginLogger.log(Level.INFO, userName +" Successful Login at " + timestamp);
-
+                loginLogger(activeUser);
 
                 if (remindersList != null) {
                     String title = remindersList.get(0).getTitle();
@@ -157,6 +155,7 @@ public class LoginScreenController implements Initializable {
                     e.printStackTrace();
                 }
             } else {
+                loginLogger(null);
                 errorMessage.setText(resourcesBundle.getString("incorrect"));
             }
 
