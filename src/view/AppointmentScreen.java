@@ -204,7 +204,7 @@ public class AppointmentScreen implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            showAppointments();
+
         } catch (Exception ex) {
             Logger.getLogger(AppointmentScreen.class.getName()).log(Level.SEVERE, null, ex);
     
@@ -228,16 +228,15 @@ public class AppointmentScreen implements Initializable {
      */
     public ObservableList<Appointment> getAppointmentList() {
         ObservableList<Appointment> appointmentList = FXCollections.observableArrayList();
-        String sqlStatement = "SELECT * FROM appointment";
-        System.out.println(sqlStatement);
-        Statement statement;
-        Connection connection = getConnection();
-        try {
-            statement = (Statement) connection.createStatement();
-            ResultSet result = statement.executeQuery(sqlStatement);
-            Appointment appointment = null;
-            while (result.next()) {
+        try { PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
+                "SELECT * From appointment WHERE createdBy = ? ");
+        preparedStatement.setString(1, currentUser.getUserName());
+        System.out.println(preparedStatement);
+        ResultSet result = preparedStatement.executeQuery();
 
+
+            while (result.next()) {
+                Appointment appointment;
                 LocalDateTime startTime = result.getTimestamp("start").toLocalDateTime();
                 LocalDateTime endTime = result.getTimestamp("end").toLocalDateTime();
                 appointment = new Appointment(result.getInt("appointmentId"),
@@ -295,6 +294,7 @@ public class AppointmentScreen implements Initializable {
 
     public void setUser(User currentUser) {
         this.currentUser = currentUser;
+        showAppointments();
 
     }
 

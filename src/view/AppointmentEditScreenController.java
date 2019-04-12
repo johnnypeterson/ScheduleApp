@@ -4,9 +4,7 @@ package view;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ResourceBundle;
@@ -100,15 +98,16 @@ public class AppointmentEditScreenController implements Initializable {
         this.currentAppointment = currentAppointment;
         titleTextField.setText(currentAppointment.getTitle());
         typeTextField.setText(currentAppointment.getDescription());
-        String end = currentAppointment.getEnd().toString();
-        String start = currentAppointment.getStart().toString();
-        LocalDateTime endComboTime = LocalDateTime.parse(end, dateTimeFormatter);
-        LocalDateTime startComboTime = LocalDateTime.parse(start, dateTimeFormatter);
-        System.out.println(startComboBox);
-//        startComboBox.getSelectionModel().select(currentAppointment.getStart().toLocalDate().format(timeFormatter));
-//        endComboBox.getSelectionModel().select(currentAppointment.getEnd().toLocalDate().format(timeFormatter));
-
-
+        ZonedDateTime end = currentAppointment.getEnd().atZone(ZoneId.of("UTC"));
+        ZonedDateTime start = currentAppointment.getStart().atZone(ZoneId.of("UTC"));
+        String startString = start.format(dateTimeFormatter);
+        String endString = end.format(dateTimeFormatter);
+        LocalDateTime endComboTime = LocalDateTime.parse(endString, dateTimeFormatter);
+        LocalDateTime startComboTime = LocalDateTime.parse(startString, dateTimeFormatter);
+        System.out.println(endComboTime);
+        startComboBox.getSelectionModel().select(startComboTime.format(timeFormatter));
+        endComboBox.getSelectionModel().select(endComboTime.format(timeFormatter));
+        datePicker.setValue(LocalDate.parse(startString, dateTimeFormatter));
     }
 
     public void setTimes() {

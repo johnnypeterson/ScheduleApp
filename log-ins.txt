@@ -30,3 +30,17 @@ Apr 11, 2019 2:38:28 PM view.LoginScreenController loginLogger
 INFO: User test successfully logged in.
 Apr 12, 2019 10:00:53 AM view.LoginScreenController loginLogger
 INFO: User test successfully logged in.
+Apr 12, 2019 10:09:33 AM view.LoginScreenController loginLogger
+INFO: User admin successfully logged in.
+Apr 12, 2019 10:11:14 AM view.LoginScreenController loginLogger
+INFO: User admin successfully logged in.
+Apr 12, 2019 10:55:41 AM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 12, 2019 11:02:35 AM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 12, 2019 11:03:35 AM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 12, 2019 11:17:52 AM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 12, 2019 11:18:19 AM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
