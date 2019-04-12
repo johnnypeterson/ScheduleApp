@@ -213,9 +213,9 @@ public class AppointmentScreen implements Initializable {
         
     }
 
-    public String dateFormat(Timestamp timestamp) {
+    public String dateFormat(LocalDateTime localDateTime) {
 
-        ZonedDateTime newzdtStart = timestamp.toLocalDateTime().atZone(ZoneId.of("UTC"));
+        ZonedDateTime newzdtStart = localDateTime.atZone(ZoneId.of("UTC"));
         ZonedDateTime newLocalStart = newzdtStart.withZoneSameInstant(zoneId);
         return  newLocalStart.format(dateTimeFormatter);
     }
@@ -238,8 +238,8 @@ public class AppointmentScreen implements Initializable {
             Appointment appointment = null;
             while (result.next()) {
 
-                String startTime = dateFormat(result.getTimestamp("start"));
-                String endTime = dateFormat(result.getTimestamp("end"));
+                LocalDateTime startTime = result.getTimestamp("start").toLocalDateTime();
+                LocalDateTime endTime = result.getTimestamp("end").toLocalDateTime();
                 appointment = new Appointment(result.getInt("appointmentId"),
                         result.getInt("customerId"),
                         result.getString("title"),

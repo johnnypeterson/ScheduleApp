@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author johnnypeterson
@@ -17,29 +19,14 @@ public class Appointment {
     private String location;
     private String contact;
     private String url;
-    private String start;
-    private String end;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
     public Appointment() {
         
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
-        return "Appointment{" +
-                "appointmentId=" + appointmentId +
-                ", customerId=" + customerId +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", location='" + location + '\'' +
-                ", contact='" + contact + '\'' +
-                ", url='" + url + '\'' +
-                ", start='" + start + '\'' +
-                ", end='" + end + '\'' +
-                '}';
-    }
-
-    public Appointment(Integer appointmentId, Integer customerId, String title, String description, String location, String contact, String url, String start, String end) {
+    public Appointment(Integer appointmentId, Integer customerId, String title, String description, String location, String contact, String url, LocalDateTime start, LocalDateTime end) {
         this.appointmentId = appointmentId;
         this.customerId = customerId;
         this.title = title;
@@ -50,7 +37,7 @@ public class Appointment {
         this.start = start;
         this.end = end;
     }
-    public Appointment(Integer appointmentId, String title, String start, String end) {
+    public Appointment(Integer appointmentId, String title, LocalDateTime start, LocalDateTime end) {
         this.appointmentId = appointmentId;
         this.title = title;
         this.start = start;
@@ -113,19 +100,19 @@ public class Appointment {
         this.url = url;
     }
 
-    public String getStart() {
+    public LocalDateTime getStart() {
         return start;
     }
 
-    public void setStart(String start) {
+    public void setStart(LocalDateTime start) {
         this.start = start;
     }
 
-    public String getEnd() {
+    public LocalDateTime getEnd() {
         return end;
     }
 
-    public void setEnd(String end) {
+    public void setEnd(LocalDateTime end) {
         this.end = end;
     }
 }

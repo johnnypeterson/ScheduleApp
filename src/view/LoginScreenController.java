@@ -13,6 +13,8 @@ package view;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.time.Clock;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -20,7 +22,9 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -121,18 +125,12 @@ public class LoginScreenController implements Initializable {
 
                 if (remindersList != null) {
                     String title = remindersList.get(0).getTitle();
-                    String time = remindersList.get(0).getStart();
+                    String time = remindersList.get(0).getStart().toString();
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Upcomming Appointments");
                     alert.setContentText("You have an uppcomming apt " + title + " at " + time);
 
-                    alert.showAndWait()
-                            .filter(response -> response == ButtonType.OK)
-                            .ifPresent((ButtonType response) -> {
-                                        Platform.exit();
-                                        System.exit(0);
-                                    }
-                            );
+                    alert.showAndWait();
 
                 }
 
@@ -209,36 +207,32 @@ public class LoginScreenController implements Initializable {
 
     private void getReminderApt() {
 
+        LocalDateTime currentTime = LocalDateTime.now(Clock.systemUTC());
 
-        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        Timestamp currentTimePlusFifteen = new Timestamp(System.currentTimeMillis());
-        currentTimePlusFifteen.setTime(currentTimePlusFifteen.getTime() + (((14 * 60) + 59)* 1000));
+
+
         System.out.println(currentTime);
-        System.out.println(currentTimePlusFifteen);
+
         try {
             PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
                     "SELECT appointment.appointmentId, appointment.title, appointment.`start`, appointment.`end` FROM appointment, customer WHERE appointment.customerId = customer.customerId AND appointment.createdBy = ? ORDER BY `start`");
             preparedStatement.setString(1, user.getUserName());
             System.out.println(preparedStatement);
             ResultSet resultSet = preparedStatement.executeQuery();
-            System.out.println(resultSet);
+            System.out.println(resultSet.toString());
 
 
             while(resultSet.next()) {
                 Integer appointmentId = resultSet.getInt("appointment.appointmentId");
-                Timestamp startTime = resultSet.getTimestamp("appointment.start");
-                Timestamp endTime = resultSet.getTimestamp("appointment.end");
-//                ZonedDateTime startZonedDateTime = startTime.toLocalDateTime().atZone(ZoneId.of("UTC"));
-//                ZonedDateTime endZonedDateTime = endTime.toLocalDateTime().atZone(ZoneId.of("UTC"));
+                Timestamp startTimeStamp = resultSet.getTimestamp("appointment.start");
+                Timestamp endTimeStamp = resultSet.getTimestamp("appointment.end");
+                LocalDateTime startTime = startTimeStamp.toLocalDateTime();
+                LocalDateTime endTime = endTimeStamp.toLocalDateTime();
                 String title = resultSet.getString("appointment.title");
-//                currentTime.toLocalDateTime().atZone(ZoneId.of("UTC"));
-//                currentTimePlusFifteen.toLocalDateTime().atZone(ZoneId.of("UTC"));
 
-//                startTime.toLocalDateTime().atZone(ZoneId.of("MST"));
-//                endTime.toLocalDateTime().atZone(ZoneId.of("MST"));
 
-                if (startTime.after(currentTime) && endTime.before(currentTimePlusFifteen)) {
-                    Appointment appointment = new Appointment(appointmentId, title, startTime.toString(), endTime.toString());
+                if (startTime.isBefore(currentTime.plusMinutes(15)) && startTime.isAfter(currentTime)) {
+                    Appointment appointment = new Appointment(appointmentId, title, startTime, endTime);
                     remindersList.add(appointment);
                 }
             }
