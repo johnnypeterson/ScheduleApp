@@ -15,6 +15,10 @@ import java.net.URL;
 import java.sql.*;
 import java.time.Clock;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ResourceBundle;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -24,7 +28,6 @@ import java.util.logging.SimpleFormatter;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -74,8 +77,9 @@ public class LoginScreenController implements Initializable {
     private Label errorMessage;
 
     private static Stage primaryStage;
-    private ObservableList<Appointment> remindersList;
-
+    private ObservableList<Appointment> remindersList = FXCollections.observableArrayList();
+    private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
+    private final ZoneId localZone = ZoneId.systemDefault();
 
     @FXML
     void cancel(ActionEvent event) {
@@ -123,12 +127,16 @@ public class LoginScreenController implements Initializable {
             if (activeUser != null) {
                 loginLogger(activeUser);
 
-                if (remindersList != null) {
+                if (remindersList.size() > 0) {
                     String title = remindersList.get(0).getTitle();
-                    String time = remindersList.get(0).getStart().toString();
+                    LocalDateTime startTime = remindersList.get(0).getStart();
+                    ZonedDateTime startZonedTime = startTime.atZone(ZoneId.of("UTC"));
+                    ZonedDateTime localStart = startZonedTime.withZoneSameInstant(localZone);
+
+
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Upcomming Appointments");
-                    alert.setContentText("You have an uppcomming apt " + title + " at " + time);
+                    alert.setContentText("You have an uppcomming apt " + title + " at " + localStart.format(timeFormatter));
 
                     alert.showAndWait();
 

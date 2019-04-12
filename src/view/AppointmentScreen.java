@@ -130,7 +130,7 @@ public class AppointmentScreen implements Initializable {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/AppointmentEditScreen.fxml"));
                 Parent sceneMain = loader.load();
                 AppointmentEditScreenController controller = loader.<AppointmentEditScreenController>getController();
-
+                controller.setUser(currentUser);
                 Scene scene = new Scene(sceneMain);
                 stage.setScene(scene);
                 controller.setAppointment(selectedAppointment);
@@ -175,15 +175,17 @@ public class AppointmentScreen implements Initializable {
 
     @FXML
     void handleNew(ActionEvent event) {
-         Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getClassLoader().getResource("view/AppointmentEditScreen.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Add New Appointment");
-            stage.setScene(new Scene(root, 800, 550));
-            
-            stage.show();
-            ((Node)(event.getSource())).getScene().getWindow();
+            try {
+                Stage stage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/AppointmentEditScreen.fxml"));
+                Parent sceneMain = loader.load();
+                AppointmentEditScreenController controller = loader.<AppointmentEditScreenController>getController();
+                controller.setUser(currentUser);
+                Scene scene = new Scene(sceneMain);
+                stage.setScene(scene);
+                stage.setTitle("New Appointment");
+                stage.show();
+                ((Node) (event.getSource())).getScene().getWindow();
         }
         catch (IOException e) {
             e.printStackTrace();

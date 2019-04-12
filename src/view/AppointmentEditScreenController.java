@@ -2,8 +2,7 @@ package view;
 
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -20,6 +19,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Appointment;
 import model.Customer;
+import model.User;
+import util.DataBase;
 
 import static util.DataBase.getConnection;
 
@@ -41,7 +42,7 @@ public class AppointmentEditScreenController implements Initializable {
     private DatePicker datePicker;
 
     @FXML
-    private TextField typeTextField;
+    private TextField descriptionTextField;
 
     @FXML
     private ComboBox<String> startComboBox;
@@ -62,6 +63,7 @@ public class AppointmentEditScreenController implements Initializable {
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
     private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
     private final ZoneId zoneId = ZoneId.systemDefault();
+    private User currentUser;
 
 
     @FXML
@@ -81,6 +83,7 @@ public class AppointmentEditScreenController implements Initializable {
 
     @FXML
     void handleSave(ActionEvent event) {
+        saveNewApt();
 
     }
 
@@ -97,7 +100,7 @@ public class AppointmentEditScreenController implements Initializable {
     public void setAppointment(Appointment currentAppointment) {
         this.currentAppointment = currentAppointment;
         titleTextField.setText(currentAppointment.getTitle());
-        typeTextField.setText(currentAppointment.getDescription());
+        descriptionTextField.setText(currentAppointment.getDescription());
         ZonedDateTime end = currentAppointment.getEnd().atZone(ZoneId.of("UTC"));
         ZonedDateTime start = currentAppointment.getStart().atZone(ZoneId.of("UTC"));
         String startString = start.format(dateTimeFormatter);
@@ -110,6 +113,9 @@ public class AppointmentEditScreenController implements Initializable {
         datePicker.setValue(LocalDate.parse(startString, dateTimeFormatter));
     }
 
+    /** This prevents scheduling outside buisness hours
+     *  do to the only selectable times being thoses in buisness hours.
+     */
     public void setTimes() {
         LocalTime time = LocalTime.of(8, 0);
         do {
@@ -159,4 +165,50 @@ public class AppointmentEditScreenController implements Initializable {
 
     }
 
+    public void saveNewApt(){
+            LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), timeFormatter);
+            LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), timeFormatter);
+            LocalDate date = datePicker.getValue();
+
+            LocalDateTime start = LocalDateTime.of(date, startTime);
+            LocalDateTime end = LocalDateTime.of(date, endTime);
+            // Convert Local time into UTC to save in DB
+            ZonedDateTime startUTC = start.atZone(zoneId).withZoneSameInstant(ZoneId.of("UTC"));
+            ZonedDateTime endUTC = end.atZone(zoneId).withZoneSameInstant(ZoneId.of("UTC"));
+
+            Timestamp startTimeStamp = Timestamp.valueOf(startUTC.toLocalDateTime());
+            Timestamp endTimeStamp = Timestamp.valueOf(endUTC.toLocalDateTime());
+                try {
+            PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
+                    "INSERT into appointment (customerId, contact, title, description, start, end, createdBy, createDate, lastUpdate, lastUpdateBy, location, url)" +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?)"
+            );
+            preparedStatement.setInt(1, customerTableView.getSelectionModel().getSelectedItem().getCustomerId());
+            preparedStatement.setString(2, customerTableView.getSelectionModel().getSelectedItem().getCustomerName());
+            preparedStatement.setString(3, titleTextField.getText());
+            preparedStatement.setString(4, descriptionTextField.getText());
+            preparedStatement.setTimestamp(5, startTimeStamp);
+            preparedStatement.setTimestamp(6, endTimeStamp);
+            preparedStatement.setString(7, currentUser.getUserName());
+            preparedStatement.setString(8, currentUser.getUserName());
+            preparedStatement.setString(9, "");
+            preparedStatement.setString(10, "");
+
+                    System.out.println(preparedStatement);
+            Integer result = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+    }
+
+    public Timestamp timeConvertor(LocalDate date, LocalTime time) {
+
+        return timestamp;
+
+    }
+
+    public void setUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
 }

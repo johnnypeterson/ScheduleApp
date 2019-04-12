@@ -33,6 +33,6 @@
             <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
         </buttons>
       </ButtonBar>
-      <TextField fx:id="typeTextField" layoutX="97.0" layoutY="72.0" prefHeight="27.0" prefWidth="144.0" />
+      <TextField fx:id="descriptionTextField" layoutX="97.0" layoutY="72.0" prefHeight="27.0" prefWidth="144.0" />
    </children>
 </AnchorPane>
