@@ -218,9 +218,6 @@ public class LoginScreenController implements Initializable {
         LocalDateTime currentTime = LocalDateTime.now(Clock.systemUTC());
 
 
-
-        System.out.println(currentTime);
-
         try {
             PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
                     "SELECT appointment.appointmentId, appointment.title, appointment.`start`, appointment.`end` FROM appointment, customer WHERE appointment.customerId = customer.customerId AND appointment.createdBy = ? ORDER BY `start`");

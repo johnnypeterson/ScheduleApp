@@ -83,7 +83,11 @@ public class AppointmentEditScreenController implements Initializable {
 
     @FXML
     void handleSave(ActionEvent event) {
-        saveNewApt();
+        if  (currentAppointment != null) {
+            updateApt();
+        } else {
+            saveNewApt();
+        }
 
     }
 
@@ -170,14 +174,8 @@ public class AppointmentEditScreenController implements Initializable {
             LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), timeFormatter);
             LocalDate date = datePicker.getValue();
 
-            LocalDateTime start = LocalDateTime.of(date, startTime);
-            LocalDateTime end = LocalDateTime.of(date, endTime);
-            // Convert Local time into UTC to save in DB
-            ZonedDateTime startUTC = start.atZone(zoneId).withZoneSameInstant(ZoneId.of("UTC"));
-            ZonedDateTime endUTC = end.atZone(zoneId).withZoneSameInstant(ZoneId.of("UTC"));
-
-            Timestamp startTimeStamp = Timestamp.valueOf(startUTC.toLocalDateTime());
-            Timestamp endTimeStamp = Timestamp.valueOf(endUTC.toLocalDateTime());
+            Timestamp startTimeStamp = timeConvertor(date, startTime);
+            Timestamp endTimeStamp = timeConvertor(date, endTime);
                 try {
             PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
                     "INSERT into appointment (customerId, contact, title, description, start, end, createdBy, createDate, lastUpdate, lastUpdateBy, location, url)" +
@@ -201,8 +199,14 @@ public class AppointmentEditScreenController implements Initializable {
                     e.printStackTrace();
                 }
     }
-
+    // Convert times from view to UTC timestamp for Data Base
     public Timestamp timeConvertor(LocalDate date, LocalTime time) {
+
+        ZoneId zoneId = ZoneId.systemDefault();
+
+        LocalDateTime localDateTime = LocalDateTime.of(date, time);
+        ZonedDateTime utcTime = localDateTime.atZone(zoneId).withZoneSameInstant(ZoneId.of("UTC"));
+        Timestamp timestamp = Timestamp.valueOf(utcTime.toLocalDateTime());
 
         return timestamp;
 
@@ -210,5 +214,33 @@ public class AppointmentEditScreenController implements Initializable {
 
     public void setUser(User currentUser) {
         this.currentUser = currentUser;
+    }
+
+    private void updateApt() {
+        LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), timeFormatter);
+        LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), timeFormatter);
+        LocalDate date = datePicker.getValue();
+
+        Timestamp startTimeStamp = timeConvertor(date, startTime);
+        Timestamp endTimeStamp = timeConvertor(date, endTime);
+        try {
+            PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement("UPDATE appointment SET customerId = ?, title = ?, description = ?, start = ?, end = ?, lastUpdate = CURRENT_TIMESTAMP, lastUpdateBy = ? WHERE appointmentId = ?");
+
+            preparedStatement.setInt(1, customerTableView.getSelectionModel().getSelectedItem().getCustomerId());
+            preparedStatement.setString(2, titleTextField.getText());
+            preparedStatement.setString(3, descriptionTextField.getText());
+            preparedStatement.setTimestamp(4, startTimeStamp);
+            preparedStatement.setTimestamp(5, endTimeStamp);
+            preparedStatement.setString(6, currentUser.getUserName());
+            preparedStatement.setInt(7, currentAppointment.getAppointmentId());
+
+
+
+            System.out.println(preparedStatement);
+            Integer result = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

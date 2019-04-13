@@ -56,10 +56,10 @@ public class AppointmentScreen implements Initializable {
     private TableView<Appointment> aptTableView;
 
     @FXML
-    private TableColumn<Appointment, LocalDateTime> startaptColumn;
+    private TableColumn<Appointment, String> startaptColumn;
 
     @FXML
-    private TableColumn<Appointment, LocalDateTime> endaptColumn;
+    private TableColumn<Appointment, String> endaptColumn;
 
     @FXML
     private TableColumn<Appointment, String> titleColumn;
@@ -257,7 +257,7 @@ public class AppointmentScreen implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(appointmentList);
+
 
         return appointmentList;
     }
@@ -267,8 +267,8 @@ public class AppointmentScreen implements Initializable {
         customerColumn.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("customerId"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("title"));
         consultantColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("contact"));
-        startaptColumn.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("start"));
-        endaptColumn.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("end"));
+        startaptColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("start"));
+        endaptColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("end"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("description"));
         aptTableView.setItems(list);
 
