@@ -179,8 +179,7 @@ public class AppointmentEditScreenController implements Initializable {
             while (result.next()) {
                 customer = new Customer(result.getInt("customerId"),
                         result.getString("customerName"),
-                        result.getInt("addressId"),
-                        result.getInt("active")
+                        result.getInt("addressId")
                 );
                 customerObservableListList.add(customer);
 

@@ -9,12 +9,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane id="AnchorPane" prefHeight="525.0" prefWidth="707.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CustomerController">
    <children>
-      <Label layoutX="14.0" layoutY="75.0" text="Name" />
-      <Label layoutX="14.0" layoutY="122.0" text="Address" />
-      <Label layoutX="8.0" layoutY="338.0" text="Phone Number" />
+      <Label layoutX="14.0" layoutY="75.0" text="Name" AnchorPane.leftAnchor="13.0" />
+      <Label layoutX="14.0" layoutY="122.0" text="Address" AnchorPane.leftAnchor="13.0" />
+      <Label layoutX="20.0" layoutY="335.0" text="Phone" AnchorPane.leftAnchor="13.0" />
       <TableView fx:id="tableView" layoutX="342.0" layoutY="14.0" prefHeight="492.0" prefWidth="352.0">
         <columns>
           <TableColumn fx:id="nameTableRow" prefWidth="154.0" text="Name" />
@@ -26,17 +25,18 @@
       </TableView>
       <ButtonBar layoutX="21.0" layoutY="434.0" prefHeight="39.0" prefWidth="292.0">
         <buttons>
-          <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleAdd" text="Add" />
+          <Button fx:id="editButton" mnemonicParsing="false" onAction="#handleEdit" text="Edit" />
             <Button fx:id="saveButton" mnemonicParsing="false" onAction="#handleSave" text="Save" />
             <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#handleDelete" text="Delete" />
         </buttons>
       </ButtonBar>
-      <TextField fx:id="nameTextField" layoutX="100.0" layoutY="70.0" />
-      <TextField fx:id="lineOneTextField" layoutX="100.0" layoutY="117.0" promptText="Line 1" />
-      <TextField fx:id="lineTwoTextField" layoutX="100.0" layoutY="156.0" text="Line 2" />
-      <TextField fx:id="phoneTextField" layoutX="110.0" layoutY="333.0" />
-      <TextField fx:id="zipTextField" layoutX="207.0" layoutY="240.0" prefHeight="27.0" prefWidth="60.0" promptText="zip" />
-      <ComboBox fx:id="stateComboBox" layoutX="100.0" layoutY="240.0" prefHeight="27.0" prefWidth="92.0" promptText="state" />
-      <TextField fx:id="cityTextField" layoutX="100.0" layoutY="200.0" text="City" />
+      <TextField fx:id="nameTextField" layoutX="100.0" layoutY="70.0" AnchorPane.leftAnchor="100.0" />
+      <TextField fx:id="lineOneTextField" layoutX="100.0" layoutY="117.0" promptText="Line 1" AnchorPane.leftAnchor="100.0" />
+      <TextField fx:id="lineTwoTextField" layoutX="100.0" layoutY="156.0" text="Line 2" AnchorPane.leftAnchor="100.0" />
+      <TextField fx:id="phoneTextField" layoutX="107.0" layoutY="330.0" AnchorPane.leftAnchor="100.0" />
+      <TextField fx:id="zipTextField" layoutX="100.0" layoutY="283.0" prefHeight="27.0" prefWidth="167.0" promptText="zip" AnchorPane.leftAnchor="100.0" />
+      <ComboBox fx:id="cityComboBox" layoutX="100.0" layoutY="195.0" prefHeight="27.0" prefWidth="167.0" AnchorPane.leftAnchor="100.0" />
+      <Label layoutX="13.0" layoutY="288.0" text="Postal Code" AnchorPane.leftAnchor="13.0" />
+      <Label layoutX="13.0" layoutY="200.0" text="City" AnchorPane.leftAnchor="13.0" />
    </children>
 </AnchorPane>

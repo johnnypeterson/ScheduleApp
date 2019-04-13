@@ -13,13 +13,47 @@ public class Customer {
     private Integer customerId;
     private String customerName;
     private Integer addressId;
-    private Integer active;
+    private Address address;
+    private City city;
+    private Country country;
 
-    public Customer(Integer customerId, String customerName, Integer addressId, Integer active) {
+    public Customer(Integer customerId, String customerName, Integer addressId, Address address, City city, Country country) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.addressId = addressId;
-        this.active = active;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+    }
+
+    public Customer(Integer customerId, String customerName, Integer addressId) {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.addressId = addressId;
+    }
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
     public Integer getCustomerId() {
@@ -46,13 +80,6 @@ public class Customer {
         this.addressId = addressId;
     }
 
-    public Integer getActive() {
-        return active;
-    }
-
-    public void setActive(Integer active) {
-        this.active = active;
-    }
 
     @java.lang.Override
     public java.lang.String toString() {
@@ -60,7 +87,6 @@ public class Customer {
                 "customerId=" + customerId +
                 ", customerName='" + customerName + '\'' +
                 ", addressId=" + addressId +
-                ", active=" + active +
                 '}';
     }
 }

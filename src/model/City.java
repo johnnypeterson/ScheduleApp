@@ -12,7 +12,6 @@ package model;
 public class City {
     private Integer cityId;
     private String city;
-    private Integer countryId;
 
 
 
@@ -32,18 +31,11 @@ public class City {
         this.city = city;
     }
 
-    public Integer getCountryId() {
-        return countryId;
-    }
 
-    public void setCountryId(Integer countryId) {
-        this.countryId = countryId;
-    }
-
-    public City(Integer cityId, String city, Integer countryId) {
+    public City(Integer cityId, String city) {
         this.cityId = cityId;
         this.city = city;
-        this.countryId = countryId;
+
 
     }
     @java.lang.Override
@@ -51,7 +43,7 @@ public class City {
         return "City{" +
                 "cityId=" + cityId +
                 ", city='" + city + '\'' +
-                ", countryId=" + countryId +
+
                 '}';
     }
 }

@@ -16,6 +16,17 @@ public class Address {
     private String address2;
     private Integer cityId;
     private String postalCode;
+    private String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+
 
 
     @java.lang.Override
@@ -29,12 +40,13 @@ public class Address {
                 '}';
     }
 
-    public Address(Integer addressId, String address, String address2, Integer cityId, String postalCode) {
+    public Address(Integer addressId, String address, String address2, Integer cityId, String postalCode, String phone) {
         this.addressId = addressId;
         this.address = address;
         this.address2 = address2;
         this.cityId = cityId;
         this.postalCode = postalCode;
+        this.phone = phone;
     }
 
     public Integer getAddressId() {

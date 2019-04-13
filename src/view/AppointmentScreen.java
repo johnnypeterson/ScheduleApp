@@ -85,14 +85,16 @@ public class AppointmentScreen implements Initializable {
     void handleCustomer(ActionEvent event) {
          Parent root;
         try {
-            root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Customer.fxml"));
             Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/Customer.fxml"));
+            Parent sceneMain = loader.load();
+            CustomerController controller = loader.<CustomerController>getController();
+            controller.setCurrentUser(currentUser);
+            Scene scene = new Scene(sceneMain);
+            stage.setScene(scene);
             stage.setTitle("Customer");
-            stage.setScene(new Scene(root, 750, 550));
-            
             stage.show();
-            // Hide this current window (if this is what you want)
-            ((Node)(event.getSource())).getScene().getWindow();
+            ((Node) (event.getSource())).getScene().getWindow();
         }
         catch (IOException e) {
             e.printStackTrace();

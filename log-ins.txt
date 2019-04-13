@@ -98,3 +98,39 @@ Apr 13, 2019 10:00:08 AM view.LoginScreenController loginLogger
 INFO: User test successfully logged in.
 Apr 13, 2019 10:02:51 AM view.LoginScreenController loginLogger
 INFO: User test successfully logged in.
+Apr 13, 2019 10:08:00 AM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 13, 2019 12:12:28 PM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 13, 2019 12:34:13 PM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 13, 2019 12:34:47 PM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 13, 2019 12:35:16 PM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 13, 2019 12:35:47 PM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 13, 2019 12:36:13 PM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 13, 2019 12:37:55 PM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 13, 2019 1:03:43 PM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 13, 2019 1:15:32 PM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 13, 2019 1:16:41 PM view.LoginScreenController loginLogger
+INFO: Invalid UserName or Password.
+Apr 13, 2019 1:18:10 PM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 13, 2019 1:19:06 PM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 13, 2019 1:27:33 PM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 13, 2019 1:28:04 PM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 13, 2019 1:29:09 PM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 13, 2019 1:30:07 PM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 13, 2019 1:30:34 PM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
