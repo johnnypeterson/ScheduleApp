@@ -136,7 +136,7 @@ public class AppointmentScreen implements Initializable {
                 controller.setAppointment(selectedAppointment);
                 stage.setTitle("Edit Appointment");
                 stage.show();
-                ((Node) (event.getSource())).getScene().getWindow();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
 
 
 
@@ -185,7 +185,7 @@ public class AppointmentScreen implements Initializable {
                 stage.setScene(scene);
                 stage.setTitle("New Appointment");
                 stage.show();
-                ((Node) (event.getSource())).getScene().getWindow();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -239,8 +239,10 @@ public class AppointmentScreen implements Initializable {
 
             while (result.next()) {
                 Appointment appointment;
-                LocalDateTime startTime = result.getTimestamp("start").toLocalDateTime();
-                LocalDateTime endTime = result.getTimestamp("end").toLocalDateTime();
+
+                ZonedDateTime startLocal = localTime(result.getTimestamp("start"));
+                ZonedDateTime endTimeLocal = localTime(result.getTimestamp("end"));
+
                 appointment = new Appointment(result.getInt("appointmentId"),
                         result.getInt("customerId"),
                         result.getString("title"),
@@ -248,8 +250,8 @@ public class AppointmentScreen implements Initializable {
                         result.getString("location"),
                         result.getString("contact"),
                         result.getString("url"),
-                        startTime,
-                        endTime
+                        startLocal.format(dateTimeFormatter),
+                        endTimeLocal.format(dateTimeFormatter)
                         );
                 appointmentList.add(appointment);
             }
@@ -302,6 +304,14 @@ public class AppointmentScreen implements Initializable {
 
     public void setCustomer() {
 
+    }
+
+    public ZonedDateTime localTime(Timestamp timestamp) {
+
+        ZoneId zoneId = ZoneId.systemDefault();
+        ZonedDateTime zonedDateTime = timestamp.toLocalDateTime().atZone(ZoneId.of("UTC"));
+        ZonedDateTime localTime = zonedDateTime.withZoneSameInstant(zoneId);
+        return localTime;
     }
    
 

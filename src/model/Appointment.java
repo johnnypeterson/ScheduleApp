@@ -19,14 +19,14 @@ public class Appointment {
     private String location;
     private String contact;
     private String url;
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private String start;
+    private String end;
 
     public Appointment() {
         
     }
 
-    public Appointment(Integer appointmentId, Integer customerId, String title, String description, String location, String contact, String url, LocalDateTime start, LocalDateTime end) {
+    public Appointment(Integer appointmentId, Integer customerId, String title, String description, String location, String contact, String url, String start, String end) {
         this.appointmentId = appointmentId;
         this.customerId = customerId;
         this.title = title;
@@ -37,7 +37,7 @@ public class Appointment {
         this.start = start;
         this.end = end;
     }
-    public Appointment(Integer appointmentId, String title, LocalDateTime start, LocalDateTime end) {
+    public Appointment(Integer appointmentId, String title, String start, String end) {
         this.appointmentId = appointmentId;
         this.title = title;
         this.start = start;
@@ -100,19 +100,19 @@ public class Appointment {
         this.url = url;
     }
 
-    public LocalDateTime getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(LocalDateTime start) {
+    public void setStart(String start) {
         this.start = start;
     }
 
-    public LocalDateTime getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    public void setEnd(LocalDateTime end) {
+    public void setEnd(String end) {
         this.end = end;
     }
 }

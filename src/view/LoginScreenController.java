@@ -129,8 +129,9 @@ public class LoginScreenController implements Initializable {
 
                 if (remindersList.size() > 0) {
                     String title = remindersList.get(0).getTitle();
-                    LocalDateTime startTime = remindersList.get(0).getStart();
-                    ZonedDateTime startZonedTime = startTime.atZone(ZoneId.of("UTC"));
+                    String  startTime = remindersList.get(0).getStart();
+                    LocalDateTime localDateTime = LocalDateTime.parse(startTime);
+                    ZonedDateTime startZonedTime = localDateTime.atZone(ZoneId.of("UTC"));
                     ZonedDateTime localStart = startZonedTime.withZoneSameInstant(localZone);
 
 
@@ -237,7 +238,7 @@ public class LoginScreenController implements Initializable {
 
 
                 if (startTime.isBefore(currentTime.plusMinutes(15)) && startTime.isAfter(currentTime)) {
-                    Appointment appointment = new Appointment(appointmentId, title, startTime, endTime);
+                    Appointment appointment = new Appointment(appointmentId, title, startTime.toString(), endTime.toString());
                     remindersList.add(appointment);
                 }
             }

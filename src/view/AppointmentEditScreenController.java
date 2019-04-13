@@ -1,6 +1,7 @@
 package view;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.time.*;
@@ -14,9 +15,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import model.Appointment;
 import model.Customer;
 import model.User;
@@ -74,8 +80,7 @@ public class AppointmentEditScreenController implements Initializable {
         alert.showAndWait()
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent((ButtonType response) -> {
-                            Platform.exit();
-                            System.exit(0);
+                            showAppointmentScreen(event);
                         }
                 );
 
@@ -88,7 +93,30 @@ public class AppointmentEditScreenController implements Initializable {
         } else {
             saveNewApt();
         }
+        showAppointmentScreen(event);
 
+
+    }
+
+    private void showAppointmentScreen(ActionEvent event) {
+        try {
+
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/AppointmentScreen.fxml"));
+
+            Parent sceneMain = loader.load();
+            AppointmentScreen controller = loader.<AppointmentScreen>getController();
+            controller.setUser(currentUser);
+
+            Scene scene = new Scene(sceneMain);
+            stage.setScene(scene);
+            stage.setTitle("Johnny Peterson Schedule App");
+            stage.show();
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -105,8 +133,10 @@ public class AppointmentEditScreenController implements Initializable {
         this.currentAppointment = currentAppointment;
         titleTextField.setText(currentAppointment.getTitle());
         descriptionTextField.setText(currentAppointment.getDescription());
-        ZonedDateTime end = currentAppointment.getEnd().atZone(ZoneId.of("UTC"));
-        ZonedDateTime start = currentAppointment.getStart().atZone(ZoneId.of("UTC"));
+        LocalDateTime startTime = LocalDateTime.parse(currentAppointment.getStart(), dateTimeFormatter);
+        LocalDateTime endTime = LocalDateTime.parse(currentAppointment.getEnd(), dateTimeFormatter);
+        ZonedDateTime end = startTime.atZone(ZoneId.of("UTC"));
+        ZonedDateTime start = endTime.atZone(ZoneId.of("UTC"));
         String startString = start.format(dateTimeFormatter);
         String endString = end.format(dateTimeFormatter);
         LocalDateTime endComboTime = LocalDateTime.parse(endString, dateTimeFormatter);
