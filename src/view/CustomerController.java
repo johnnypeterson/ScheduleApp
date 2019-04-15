@@ -36,8 +36,7 @@ public class CustomerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setCustomerView();
-
-        cityComboBox.setItems(getCityList());
+        setCityTableView();
 
     }
 
@@ -65,9 +64,14 @@ public class CustomerController implements Initializable {
     @FXML
     private TextField zipTextField;
 
+    @FXML
+    private TableView<City> cityTableView;
 
     @FXML
-    private ComboBox<City> cityComboBox;
+    private TableColumn<City, Integer> idColum;
+
+    @FXML
+    private TableColumn<City, String> cityColumn;
 
     @FXML
     private Button addButton;
@@ -78,8 +82,19 @@ public class CustomerController implements Initializable {
     @FXML
     private Button deleteButton;
 
+    public User currentUser;
+
     @FXML
     void handleEdit(ActionEvent event) {
+        Customer customer = tableView.getSelectionModel().getSelectedItem();
+        if (customer != null) {
+            setCustomerEditView(customer);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Nothing Selected");
+            alert.setContentText("Please select an Customer in the Table to edit");
+            alert.showAndWait();
+        }
 
     }
 
@@ -106,11 +121,90 @@ public class CustomerController implements Initializable {
 
     @FXML
     void handleSave(ActionEvent event) {
-        saveCustomer();
-        setCustomerView();
+        Customer selectedCustomer = tableView.getSelectionModel().getSelectedItem();
+        if (selectedCustomer == null) {
+            saveCustomer();
+            setCustomerView();
+        } else {
+            updateCustomer(selectedCustomer);
+            setCustomerView();
+
+        }
     }
 
-    public User currentUser;
+    private void updateCustomer(Customer customer) {
+        City selectedCity = cityTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedCity != null) {
+            try {
+                PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
+                        "UPDATE address, customer, city, country SET address = ?, address2 = ?, address.cityId = ?, postalCode = ?, phone = ?, address.lastUpdate = CURRENT_TIMESTAMP, address.lastUpdateBy = ?WHERE customer.customerId = ? AND customer.addressId = address.addressId AND address.cityId = city.cityId AND city.countryId = country.countryId"
+                );
+                preparedStatement.setString(1, lineOneTextField.getText());
+                preparedStatement.setString(2, lineTwoTextField.getText());
+                preparedStatement.setInt(3, selectedCity.getCityId());
+                preparedStatement.setString(4, zipTextField.getText());
+                preparedStatement.setString(5, phoneTextField.getText());
+                preparedStatement.setString(6, currentUser.getUserName());
+                preparedStatement.setInt(7, customer.getCustomerId());
+
+                Integer result = preparedStatement.executeUpdate();
+
+                PreparedStatement preparedStatement2 = DataBase.getConnection().prepareStatement(
+                        "UPDATE customer, address, city SET customerName = ?, customer.lastUpdate = CURRENT_TIMESTAMP, customer.lastUpdateBy = ? WHERE customer.customerId = ? AND customer.addressId = address.addressId AND address.cityId = city.cityId"
+                );
+                preparedStatement2.setString(1, nameTextField.getText());
+                preparedStatement2.setString(2, currentUser.getUserName());
+                preparedStatement2.setInt(3, customer.getCustomerId());
+
+
+                Integer result2 = preparedStatement2.executeUpdate();
+
+
+                saveFailedAlert(result2);
+
+            } catch (Exception e) {
+                exceptionAlert(e);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Nothing Selected");
+            alert.setContentText("Please select an City in the City Table");
+            alert.showAndWait();
+        }
+    }
+
+
+    private  void clearTextFields() {
+        nameTextField.clear();
+        lineOneTextField.clear();
+        lineTwoTextField.clear();
+        zipTextField.clear();
+        phoneTextField.clear();
+    }
+
+    private ObservableList<City> setCitys() {
+        ObservableList<City> cityObservableList = FXCollections.observableArrayList();
+        try {
+            PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
+                    "Select * From City"
+            );
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                City city;
+                city = new City(resultSet.getInt("cityId"),
+                        resultSet.getString("city"));
+                cityObservableList.add(city);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cityObservableList;
+    }
+
+
+
+
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
@@ -158,48 +252,90 @@ public class CustomerController implements Initializable {
     private void setCustomerView() {
         nameTableRow.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         idTableRow.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-
-
         tableView.getItems().setAll(getCustomerList());
+
+    }
+
+    private void setCityTableView() {
+        cityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
+        idColum.setCellValueFactory(new PropertyValueFactory<>("cityId"));
+        cityTableView.getItems().setAll(getCityList());
+    }
+
+    private void setCustomerEditView(Customer customer) {
+        nameTextField.setText(customer.getCustomerName());
+        lineOneTextField.setText(customer.getAddress().getAddress());
+        lineTwoTextField.setText(customer.getAddress().getAddress2());
+        zipTextField.setText(customer.getAddress().getPostalCode());
+        phoneTextField.setText(customer.getAddress().getPhone());
+
     }
 
     private void saveCustomer() {
 
+        City selectedCity = cityTableView.getSelectionModel().getSelectedItem();
 
-       try { PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
-                "INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP, ?)",Statement.RETURN_GENERATED_KEYS);
+        if (selectedCity != null) {
+            try {
+                PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
+                        "INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP, ?)", Statement.RETURN_GENERATED_KEYS);
 
-        preparedStatement.setString(1, lineOneTextField.getText());
-        preparedStatement.setString(2, lineTwoTextField.getText());
-        preparedStatement.setInt(3, cityComboBox.getValue().getCityId());
-        preparedStatement.setString(4, zipTextField.getText());
-        preparedStatement.setString(5, phoneTextField.getText());
-        preparedStatement.setString(6, currentUser.getUserName());
-        preparedStatement.setString(7, currentUser.getUserName());
-           Integer addressId = null;
-           Boolean resultBool = preparedStatement.execute();
-           ResultSet resultKeys = preparedStatement.getGeneratedKeys();
+                preparedStatement.setString(1, lineOneTextField.getText());
+                preparedStatement.setString(2, lineTwoTextField.getText());
+                preparedStatement.setInt(3, selectedCity.getCityId());
+                preparedStatement.setString(4, zipTextField.getText());
+                preparedStatement.setString(5, phoneTextField.getText());
+                preparedStatement.setString(6, currentUser.getUserName());
+                preparedStatement.setString(7, currentUser.getUserName());
+                Integer addressId = null;
+                Boolean resultBool = preparedStatement.execute();
+                ResultSet resultKeys = preparedStatement.getGeneratedKeys();
 
-           if (resultKeys.next()) {
-               addressId = resultKeys.getInt(1);
-           }
+                if (resultKeys.next()) {
+                    addressId = resultKeys.getInt(1);
+                }
 
-           PreparedStatement preparedStatement2 = DataBase.getConnection().prepareStatement(
-                   "INSERT INTO customer (customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy)VALUES (?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP, ?)"
-           );
-           preparedStatement2.setString(1, nameTextField.getText());
-           preparedStatement2.setInt(2, addressId);
-           preparedStatement2.setInt(3,1);
-           preparedStatement2.setString(4, currentUser.getUserName());
-           preparedStatement2.setString(5, currentUser.getUserName());
+                PreparedStatement preparedStatement2 = DataBase.getConnection().prepareStatement(
+                        "INSERT INTO customer (customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy)VALUES (?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP, ?)"
+                );
+                preparedStatement2.setString(1, nameTextField.getText());
+                preparedStatement2.setInt(2, addressId);
+                preparedStatement2.setInt(3, 1);
+                preparedStatement2.setString(4, currentUser.getUserName());
+                preparedStatement2.setString(5, currentUser.getUserName());
 
-           Integer result = preparedStatement2.executeUpdate();
+                Integer result = preparedStatement2.executeUpdate();
 
+                saveFailedAlert(result);
 
+            } catch (Exception e) {
+                exceptionAlert(e);
+            }
+        } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Nothing Selected");
+                alert.setContentText("Please select an City in the City Table");
+                alert.showAndWait();
+        }
+    }
 
-       } catch (SQLException e) {
-           e.printStackTrace();
-       }
+    private void exceptionAlert(Exception e) {
+        e.printStackTrace();
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Failed To Save");
+        alert.setContentText("Unable to save with data provided." + e.toString());
+        alert.showAndWait();
+    }
+
+    private void saveFailedAlert(Integer result) {
+        if (result == 1) {
+            clearTextFields();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Failed To Save");
+            alert.setContentText("Unable to save with data provided.");
+            alert.showAndWait();
+        }
     }
 
     private ObservableList<City> getCityList() {

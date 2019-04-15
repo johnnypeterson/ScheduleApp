@@ -10,7 +10,6 @@ import java.time.format.FormatStyle;
 import java.util.ResourceBundle;
 
 import com.mysql.jdbc.Statement;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -56,6 +55,7 @@ public class AppointmentEditScreenController implements Initializable {
     @FXML
     private ComboBox<String> endComboBox;
 
+
     @FXML
     private Button saveButton;
 
@@ -68,7 +68,7 @@ public class AppointmentEditScreenController implements Initializable {
     private final ObservableList<String> end = FXCollections.observableArrayList();
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
     private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
-    private final ZoneId zoneId = ZoneId.systemDefault();
+
     private User currentUser;
 
 
@@ -132,7 +132,7 @@ public class AppointmentEditScreenController implements Initializable {
     public void setAppointment(Appointment currentAppointment) {
         this.currentAppointment = currentAppointment;
         titleTextField.setText(currentAppointment.getTitle());
-        descriptionTextField.setText(currentAppointment.getDescription());
+        descriptionTextField.setText(currentAppointment.getType());
         LocalDateTime startTime = LocalDateTime.parse(currentAppointment.getStart(), dateTimeFormatter);
         LocalDateTime endTime = LocalDateTime.parse(currentAppointment.getEnd(), dateTimeFormatter);
         ZonedDateTime end = startTime.atZone(ZoneId.of("UTC"));
@@ -224,8 +224,9 @@ public class AppointmentEditScreenController implements Initializable {
                     System.out.println(preparedStatement);
             Integer result = preparedStatement.executeUpdate();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
                     e.printStackTrace();
+                    exceptionAlert(e);
                 }
     }
     // Convert times from view to UTC timestamp for Data Base
@@ -268,8 +269,17 @@ public class AppointmentEditScreenController implements Initializable {
             System.out.println(preparedStatement);
             Integer result = preparedStatement.executeUpdate();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            exceptionAlert(e);
         }
+    }
+
+    private void exceptionAlert(Exception e) {
+        e.printStackTrace();
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Failed To Save");
+        alert.setContentText("Unable to save with data provided." + e.toString());
+        alert.showAndWait();
     }
 }

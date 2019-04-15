@@ -5,8 +5,6 @@
  */
 package model;
 
-import java.time.LocalDateTime;
-
 /**
  *
  * @author johnnypeterson
@@ -15,7 +13,7 @@ public class Appointment {
     private Integer appointmentId;
     private Integer customerId;
     private String title;
-    private String description;
+    private String type;
     private String location;
     private String contact;
     private String url;
@@ -26,11 +24,11 @@ public class Appointment {
         
     }
 
-    public Appointment(Integer appointmentId, Integer customerId, String title, String description, String location, String contact, String url, String start, String end) {
+    public Appointment(Integer appointmentId, Integer customerId, String title, String type, String location, String contact, String url, String start, String end) {
         this.appointmentId = appointmentId;
         this.customerId = customerId;
         this.title = title;
-        this.description = description;
+        this.type = type;
         this.location = location;
         this.contact = contact;
         this.url = url;
@@ -68,12 +66,12 @@ public class Appointment {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getType() {
+        return type;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getLocation() {

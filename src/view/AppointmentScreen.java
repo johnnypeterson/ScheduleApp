@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,10 +30,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
@@ -72,13 +70,31 @@ public class AppointmentScreen implements Initializable {
 
     @FXML
     private TableColumn<Appointment, String> consultantColumn;
-    
+
+    @FXML
+    private RadioButton weekToogleButton;
+
+    @FXML
+    private RadioButton monthToggleButton;
+
     private User currentUser;
 
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
     private final ZoneId zoneId = ZoneId.systemDefault();
+    private ToggleGroup toggleGroup;
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+
+        // Set up toggle group so only one button can be selected at a time.
+        toggleGroup = new ToggleGroup();
+        this.weekToogleButton.setToggleGroup(toggleGroup);
+        this.monthToggleButton.setToggleGroup(toggleGroup);
+
+
+
+    }
 
 
     @FXML
@@ -144,6 +160,7 @@ public class AppointmentScreen implements Initializable {
 
             } catch (IOException e) {
                 e.printStackTrace();
+
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -153,6 +170,8 @@ public class AppointmentScreen implements Initializable {
         }
 
     }
+
+
 
     @FXML
     void handleLogOut(ActionEvent event) {
@@ -172,6 +191,32 @@ public class AppointmentScreen implements Initializable {
 
     @FXML
     void handleMonth(ActionEvent event) {
+        LocalDate localDateNow = LocalDate.now();
+        LocalDate localDatePlusMonth = localDateNow.plusMonths(1);
+        FilteredList<Appointment> filteredList = new FilteredList<>(getAppointmentList());
+        // Use Lambda to filter and return new list while in setPredicate
+        filteredList.setPredicate(row -> {
+            LocalDate localDateRow = LocalDate.parse(row.getStart(), dateTimeFormatter);
+            return localDateRow.isAfter(localDateNow.minusDays(1))  && localDateRow.isBefore(localDatePlusMonth);
+        });
+        aptTableView.setItems(filteredList);
+
+    }
+
+
+    @FXML
+    void handleWeek(ActionEvent event) {
+
+        LocalDate localDateNow = LocalDate.now();
+        LocalDate localDatePlusWeek = localDateNow.plusDays(7);
+        FilteredList<Appointment> filteredList = new FilteredList<>(getAppointmentList());
+        // Use Lambda to filter and return new list while in setPredicate
+        filteredList.setPredicate(row -> {
+            LocalDate localDateRow = LocalDate.parse(row.getStart(), dateTimeFormatter);
+            return localDateRow.isAfter(localDateNow.minusDays(1))  && localDateRow.isBefore(localDatePlusWeek);
+        });
+        aptTableView.setItems(filteredList);
+
 
     }
 
@@ -200,22 +245,8 @@ public class AppointmentScreen implements Initializable {
 
     }
 
-    @FXML
-    void handleWeek(ActionEvent event) {
-
-    }
     
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        try {
 
-        } catch (Exception ex) {
-            Logger.getLogger(AppointmentScreen.class.getName()).log(Level.SEVERE, null, ex);
-    
-         }
-
-        
-    }
 
     public String dateFormat(LocalDateTime localDateTime) {
 
@@ -273,7 +304,7 @@ public class AppointmentScreen implements Initializable {
         consultantColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("contact"));
         startaptColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("start"));
         endaptColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("end"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("description"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("type"));
         aptTableView.setItems(list);
 
 

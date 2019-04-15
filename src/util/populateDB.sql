@@ -120,7 +120,7 @@ INSERT INTO customer
     (27,'Customer-27',27,1,CURDATE(),'admin','admin');
 
 INSERT INTO appointment
-	(appointmentId,customerId,title,description,location,contact,url,start,end,createDate,createdBy,lastUpdateBy) VALUES
+	(appointmentId,customerId,title,type,location,contact,url,start,end,createDate,createdBy,lastUpdateBy) VALUES
     (1,1,'Meeting','First Meeting','New York, New York','wflick','','2017-02-08 09:00:00','2017-02-08 10:00:00',CURDATE(),'admin','admin'),
 	(2,1,'Consulting','First Consultation','New York, New York','wflick','','2017-02-09 09:00:00','2017-02-09 10:00:00',CURDATE(),'admin','admin'),
     (3,1,'Consulting','Follow-up','New York, New York','wflick','','2017-02-10 10:00:00','2017-02-10 11:00:00',CURDATE(),'admin','admin'),

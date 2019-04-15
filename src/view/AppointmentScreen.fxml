@@ -29,8 +29,8 @@
             <Button mnemonicParsing="false" onAction="#handleDelete" prefHeight="27.0" prefWidth="90.0" text="Delete" />
         </buttons>
       </ButtonBar>
-      <RadioButton layoutX="310.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleWeek" text="Week" />
-      <RadioButton layoutX="310.0" layoutY="37.0" mnemonicParsing="false" onAction="#handleMonth" text="Month" />
+      <RadioButton fx:id="weekToogleButton" layoutX="310.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleWeek" text="Week" />
+      <RadioButton fx:id="monthToggleButton" layoutX="310.0" layoutY="37.0" mnemonicParsing="false" onAction="#handleMonth" text="Month" />
       <ButtonBar layoutX="263.0" layoutY="474.0" prefHeight="40.0" prefWidth="297.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="40.0">
         <buttons>
           <Button mnemonicParsing="false" onAction="#handleReports" text="Reports" />
