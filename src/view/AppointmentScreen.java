@@ -242,6 +242,21 @@ public class AppointmentScreen implements Initializable {
 
     @FXML
     void handleReports(ActionEvent event) {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ReportsScreen.fxml"));
+            Parent sceneMain = loader.load();
+            ReportsController controller = loader.<ReportsController>getController();
+
+            Scene scene = new Scene(sceneMain);
+            stage.setScene(scene);
+            stage.setTitle("Reports");
+            stage.show();
+            ((Node) (event.getSource())).getScene().getWindow();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

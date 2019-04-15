@@ -183,28 +183,6 @@ public class CustomerController implements Initializable {
         phoneTextField.clear();
     }
 
-    private ObservableList<City> setCitys() {
-        ObservableList<City> cityObservableList = FXCollections.observableArrayList();
-        try {
-            PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
-                    "Select * From City"
-            );
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                City city;
-                city = new City(resultSet.getInt("cityId"),
-                        resultSet.getString("city"));
-                cityObservableList.add(city);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return cityObservableList;
-    }
-
-
-
-
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
