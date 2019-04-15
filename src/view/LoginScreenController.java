@@ -6,9 +6,25 @@
 package view;
 
 /**
- *
  * @author johnnypeterson
  */
+
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+import model.Appointment;
+import model.User;
+import scheduleapp.ScheduleApp;
+import util.DataBase;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,28 +40,6 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
-
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import model.Appointment;
-import scheduleapp.ScheduleApp;
-import model.User;
-import util.DataBase;
 
 import static util.DataBase.getConnection;
 
@@ -83,12 +77,12 @@ public class LoginScreenController implements Initializable {
 
     @FXML
     void cancel(ActionEvent event) {
-     
-         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Cancel");
         alert.setContentText("Are you sure you want to close the program");
-        
-          alert.showAndWait()
+
+        alert.showAndWait()
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent((ButtonType response) -> {
                             Platform.exit();
@@ -97,6 +91,7 @@ public class LoginScreenController implements Initializable {
                 );
 
     }
+
     private void loginLogger(User user) {
         Logger log = Logger.getLogger("log-ins.txt");
         log.setLevel(Level.INFO);
@@ -116,20 +111,21 @@ public class LoginScreenController implements Initializable {
     }
 
     private ScheduleApp mainApp;
+
     @FXML
     void login(ActionEvent event) throws ClassNotFoundException, SQLException, IOException {
 
         ResourceBundle resourcesBundle = ResourceBundle.getBundle("language/login");
-               String username = usernameText.getText();
+        String username = usernameText.getText();
         String password = passwordText.getText();
-        if(username.length() > 0 && password.length() > 0) {
+        if (username.length() > 0 && password.length() > 0) {
             User activeUser = validLogin(username, password);
             if (activeUser != null) {
                 loginLogger(activeUser);
 
                 if (remindersList.size() > 0) {
                     String title = remindersList.get(0).getTitle();
-                    String  startTime = remindersList.get(0).getStart();
+                    String startTime = remindersList.get(0).getStart();
                     LocalDateTime localDateTime = LocalDateTime.parse(startTime);
                     ZonedDateTime startZonedTime = localDateTime.atZone(ZoneId.of("UTC"));
                     ZonedDateTime localStart = startZonedTime.withZoneSameInstant(localZone);
@@ -169,7 +165,7 @@ public class LoginScreenController implements Initializable {
         }
 
     }
-    
+
     User user = new User();
 
     public LoginScreenController() {
@@ -193,17 +189,17 @@ public class LoginScreenController implements Initializable {
         passwordLabel.setText(resourcesBundle.getString("password"));
         cancelButton.setText(resourcesBundle.getString("cancel"));
         loginButton.setText(resourcesBundle.getString("signin"));
-        
+
 
     }
-    
+
     public User validLogin(String username, String password) throws ClassNotFoundException, SQLException {
         String sqlStatement = "SELECT * FROM user WHERE userName=" + "'" + username + "'" + "AND password=" + "'" + password + "'";
         Connection connection = getConnection();
         Statement statement;
         statement = (Statement) connection.createStatement();
         ResultSet result = statement.executeQuery(sqlStatement);
-        if(result.next()) {
+        if (result.next()) {
             user.setUserName(result.getString("userName"));
             user.setPassword(result.getString("password"));
             user.setUserId(result.getInt("userId"));
@@ -228,7 +224,7 @@ public class LoginScreenController implements Initializable {
             System.out.println(resultSet.toString());
 
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 Integer appointmentId = resultSet.getInt("appointment.appointmentId");
                 Timestamp startTimeStamp = resultSet.getTimestamp("appointment.start");
                 Timestamp endTimeStamp = resultSet.getTimestamp("appointment.end");
@@ -248,7 +244,6 @@ public class LoginScreenController implements Initializable {
 
 
     }
-
 
 
 }

@@ -2,23 +2,6 @@
 package view;
 
 
-import com.mysql.jdbc.Statement;
-
-import java.awt.*;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,17 +20,21 @@ import model.Appointment;
 import model.User;
 import util.DataBase;
 
-
-import static util.DataBase.getConnection;
-import static util.DataBase.makeConnection;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.ResourceBundle;
 
 /**
- *
  * @author johnnypeterson
  */
 public class AppointmentScreen implements Initializable {
-
-
 
 
     @FXML
@@ -93,13 +80,12 @@ public class AppointmentScreen implements Initializable {
         this.monthToggleButton.setToggleGroup(toggleGroup);
 
 
-
     }
 
 
     @FXML
     void handleCustomer(ActionEvent event) {
-         Parent root;
+        Parent root;
         try {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/Customer.fxml"));
@@ -111,8 +97,7 @@ public class AppointmentScreen implements Initializable {
             stage.setTitle("Customer");
             stage.show();
             ((Node) (event.getSource())).getScene().getWindow();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -122,13 +107,14 @@ public class AppointmentScreen implements Initializable {
     void handleDelete(ActionEvent event) {
         Appointment selectedAppointment = aptTableView.getSelectionModel().getSelectedItem();
 
-        if(selectedAppointment != null) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Delete Appointment");
-        alert.setHeaderText("Are you sure?");
-        alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> {deleteAppointment(selectedAppointment);
-            showAppointments();
-        });
+        if (selectedAppointment != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Appointment");
+            alert.setHeaderText("Are you sure?");
+            alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> {
+                deleteAppointment(selectedAppointment);
+                showAppointments();
+            });
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Nothing Selected");
@@ -140,7 +126,7 @@ public class AppointmentScreen implements Initializable {
 
     @FXML
     void handleEdit(ActionEvent event) {
-      Appointment selectedAppointment = aptTableView.getSelectionModel().getSelectedItem();
+        Appointment selectedAppointment = aptTableView.getSelectionModel().getSelectedItem();
 
         if (selectedAppointment != null) {
             try {
@@ -157,7 +143,6 @@ public class AppointmentScreen implements Initializable {
                 ((Node) (event.getSource())).getScene().getWindow().hide();
 
 
-
             } catch (IOException e) {
                 e.printStackTrace();
 
@@ -170,7 +155,6 @@ public class AppointmentScreen implements Initializable {
         }
 
     }
-
 
 
     @FXML
@@ -197,7 +181,7 @@ public class AppointmentScreen implements Initializable {
         // Use Lambda to filter and return new list while in setPredicate
         filteredList.setPredicate(row -> {
             LocalDate localDateRow = LocalDate.parse(row.getStart(), dateTimeFormatter);
-            return localDateRow.isAfter(localDateNow.minusDays(1))  && localDateRow.isBefore(localDatePlusMonth);
+            return localDateRow.isAfter(localDateNow.minusDays(1)) && localDateRow.isBefore(localDatePlusMonth);
         });
         aptTableView.setItems(filteredList);
 
@@ -213,7 +197,7 @@ public class AppointmentScreen implements Initializable {
         // Use Lambda to filter and return new list while in setPredicate
         filteredList.setPredicate(row -> {
             LocalDate localDateRow = LocalDate.parse(row.getStart(), dateTimeFormatter);
-            return localDateRow.isAfter(localDateNow.minusDays(1))  && localDateRow.isBefore(localDatePlusWeek);
+            return localDateRow.isAfter(localDateNow.minusDays(1)) && localDateRow.isBefore(localDatePlusWeek);
         });
         aptTableView.setItems(filteredList);
 
@@ -222,19 +206,18 @@ public class AppointmentScreen implements Initializable {
 
     @FXML
     void handleNew(ActionEvent event) {
-            try {
-                Stage stage = new Stage();
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/AppointmentEditScreen.fxml"));
-                Parent sceneMain = loader.load();
-                AppointmentEditScreenController controller = loader.<AppointmentEditScreenController>getController();
-                controller.setUser(currentUser);
-                Scene scene = new Scene(sceneMain);
-                stage.setScene(scene);
-                stage.setTitle("New Appointment");
-                stage.show();
-                ((Node) (event.getSource())).getScene().getWindow().hide();
-        }
-        catch (IOException e) {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/AppointmentEditScreen.fxml"));
+            Parent sceneMain = loader.load();
+            AppointmentEditScreenController controller = loader.<AppointmentEditScreenController>getController();
+            controller.setUser(currentUser);
+            Scene scene = new Scene(sceneMain);
+            stage.setScene(scene);
+            stage.setTitle("New Appointment");
+            stage.show();
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -253,36 +236,33 @@ public class AppointmentScreen implements Initializable {
             stage.setTitle("Reports");
             stage.show();
             ((Node) (event.getSource())).getScene().getWindow();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
-
-    
 
 
     public String dateFormat(LocalDateTime localDateTime) {
 
         ZonedDateTime newzdtStart = localDateTime.atZone(ZoneId.of("UTC"));
         ZonedDateTime newLocalStart = newzdtStart.withZoneSameInstant(zoneId);
-        return  newLocalStart.format(dateTimeFormatter);
+        return newLocalStart.format(dateTimeFormatter);
     }
-    
+
     /**
-     *
      * @return
      * @throws ClassNotFoundException
      * @throws SQLException
      */
     public ObservableList<Appointment> getAppointmentList() {
         ObservableList<Appointment> appointmentList = FXCollections.observableArrayList();
-        try { PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
-                "SELECT * From appointment WHERE createdBy = ? ");
-        preparedStatement.setString(1, currentUser.getUserName());
-        System.out.println(preparedStatement);
-        ResultSet result = preparedStatement.executeQuery();
+        try {
+            PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
+                    "SELECT * From appointment WHERE createdBy = ? ");
+            preparedStatement.setString(1, currentUser.getUserName());
+            System.out.println(preparedStatement);
+            ResultSet result = preparedStatement.executeQuery();
 
 
             while (result.next()) {
@@ -300,7 +280,7 @@ public class AppointmentScreen implements Initializable {
                         result.getString("url"),
                         startLocal.format(dateTimeFormatter),
                         endTimeLocal.format(dateTimeFormatter)
-                        );
+                );
                 appointmentList.add(appointment);
             }
 
@@ -323,16 +303,17 @@ public class AppointmentScreen implements Initializable {
         aptTableView.setItems(list);
 
 
-
     }
-    private  void deleteAppointment (Appointment appointment) {
+
+    private void deleteAppointment(Appointment appointment) {
         try {
-            String query = "Delete From appointment Where appointmentId="+appointment.getAppointmentId().toString();
+            String query = "Delete From appointment Where appointmentId=" + appointment.getAppointmentId().toString();
             executeQuery(query);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     public void executeQuery(String query) {
         Connection conn = DataBase.getConnection();
         java.sql.Statement st;
@@ -361,7 +342,7 @@ public class AppointmentScreen implements Initializable {
         ZonedDateTime localTime = zonedDateTime.withZoneSameInstant(zoneId);
         return localTime;
     }
-   
+
 
 }
 

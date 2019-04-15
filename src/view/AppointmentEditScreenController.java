@@ -88,7 +88,7 @@ public class AppointmentEditScreenController implements Initializable {
 
     @FXML
     void handleSave(ActionEvent event) {
-        if  (currentAppointment != null) {
+        if (currentAppointment != null) {
             updateApt();
         } else {
             saveNewApt();
@@ -147,8 +147,9 @@ public class AppointmentEditScreenController implements Initializable {
         datePicker.setValue(LocalDate.parse(startString, dateTimeFormatter));
     }
 
-    /** This prevents scheduling outside buisness hours
-     *  do to the only selectable times being thoses in buisness hours.
+    /**
+     * This prevents scheduling outside buisness hours
+     * do to the only selectable times being thoses in buisness hours.
      */
     public void setTimes() {
         LocalTime time = LocalTime.of(8, 0);
@@ -191,21 +192,21 @@ public class AppointmentEditScreenController implements Initializable {
     }
 
     public void showCustomers() {
-    ObservableList<Customer> list = getCustomerList();
+        ObservableList<Customer> list = getCustomerList();
         customerNameColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("customerName"));
         customerIdColumn.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("customerId"));
         customerTableView.setItems(list);
 
     }
 
-    public void saveNewApt(){
-            LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), timeFormatter);
-            LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), timeFormatter);
-            LocalDate date = datePicker.getValue();
+    public void saveNewApt() {
+        LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), timeFormatter);
+        LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), timeFormatter);
+        LocalDate date = datePicker.getValue();
 
-            Timestamp startTimeStamp = timeConvertor(date, startTime);
-            Timestamp endTimeStamp = timeConvertor(date, endTime);
-                try {
+        Timestamp startTimeStamp = timeConvertor(date, startTime);
+        Timestamp endTimeStamp = timeConvertor(date, endTime);
+        try {
             PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
                     "INSERT into appointment (customerId, contact, title, description, start, end, createdBy, createDate, lastUpdate, lastUpdateBy, location, url)" +
                             "VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?)"
@@ -221,14 +222,15 @@ public class AppointmentEditScreenController implements Initializable {
             preparedStatement.setString(9, "");
             preparedStatement.setString(10, "");
 
-                    System.out.println(preparedStatement);
+            System.out.println(preparedStatement);
             Integer result = preparedStatement.executeUpdate();
 
         } catch (Exception e) {
-                    e.printStackTrace();
-                    exceptionAlert(e);
-                }
+            e.printStackTrace();
+            exceptionAlert(e);
+        }
     }
+
     // Convert times from view to UTC timestamp for Data Base
     public Timestamp timeConvertor(LocalDate date, LocalTime time) {
 
@@ -263,7 +265,6 @@ public class AppointmentEditScreenController implements Initializable {
             preparedStatement.setTimestamp(5, endTimeStamp);
             preparedStatement.setString(6, currentUser.getUserName());
             preparedStatement.setInt(7, currentAppointment.getAppointmentId());
-
 
 
             System.out.println(preparedStatement);

@@ -1,15 +1,6 @@
 package view;
 
 
-
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.ResourceBundle;
-
 import com.mysql.jdbc.Statement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,7 +12,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.*;
 import util.DataBase;
 
-import static util.DataBase.getConnection;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 /**
  * FXML Controller class
@@ -102,11 +98,12 @@ public class CustomerController implements Initializable {
     void handleDelete(ActionEvent event) {
         Customer selectedCustomer = tableView.getSelectionModel().getSelectedItem();
 
-        if(selectedCustomer != null) {
+        if (selectedCustomer != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete Customer");
             alert.setHeaderText("Are you sure?");
-            alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> {deleteCustomer(selectedCustomer);
+            alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> {
+                deleteCustomer(selectedCustomer);
                 setCustomerView();
             });
         } else {
@@ -175,7 +172,7 @@ public class CustomerController implements Initializable {
     }
 
 
-    private  void clearTextFields() {
+    private void clearTextFields() {
         nameTextField.clear();
         lineOneTextField.clear();
         lineTwoTextField.clear();
@@ -290,10 +287,10 @@ public class CustomerController implements Initializable {
                 exceptionAlert(e);
             }
         } else {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Nothing Selected");
-                alert.setContentText("Please select an City in the City Table");
-                alert.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Nothing Selected");
+            alert.setContentText("Please select an City in the City Table");
+            alert.showAndWait();
         }
     }
 
@@ -323,8 +320,8 @@ public class CustomerController implements Initializable {
             PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement("SELECT * from city");
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while(resultSet.next()) {
-                cityList.add(new City(resultSet.getInt("cityId"),resultSet.getString( "city")));
+            while (resultSet.next()) {
+                cityList.add(new City(resultSet.getInt("cityId"), resultSet.getString("city")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -335,12 +332,13 @@ public class CustomerController implements Initializable {
 
     private void deleteCustomer(Customer customer) {
         try {
-            String query = "Delete From customer Where customerId="+customer.getCustomerId();
+            String query = "Delete From customer Where customerId=" + customer.getCustomerId();
             executeQuery(query);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     public void executeQuery(String query) {
         Connection conn = DataBase.getConnection();
         java.sql.Statement st;
@@ -351,7 +349,6 @@ public class CustomerController implements Initializable {
             e.printStackTrace();
         }
     }
-
 
 
 }

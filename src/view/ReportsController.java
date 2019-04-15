@@ -7,8 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Appointment;
-import model.City;
 import model.TypeCount;
 import util.DataBase;
 
