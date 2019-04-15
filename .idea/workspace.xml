@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29d106f6-db13-4705-9a3d-c406a0e7381a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/model/TypeCount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/TypeCount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/AppointmentEditScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentEditScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/AppointmentScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReadMe.md" beforeDir="false" afterPath="$PROJECT_DIR$/ReadMe.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log-ins.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log-ins.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/ReportsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ReportsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ReportsScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ReportsScreen.fxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -122,11 +120,11 @@
           <entry key="incrementtypes" value="1" />
           <entry key="java" value="41" />
           <entry key="lck" value="5" />
-          <entry key="md" value="1" />
+          <entry key="md" value="2" />
           <entry key="mf" value="2" />
           <entry key="properties" value="3" />
           <entry key="reminder" value="1" />
-          <entry key="sql" value="13" />
+          <entry key="sql" value="14" />
           <entry key="txt" value="4" />
         </counts>
       </usages-collector>
@@ -135,30 +133,32 @@
           <entry key="Database Element" value="10" />
           <entry key="JAVA" value="41" />
           <entry key="Manifest" value="2" />
-          <entry key="Markdown" value="1" />
+          <entry key="Markdown" value="2" />
           <entry key="PLAIN_TEXT" value="13" />
           <entry key="Properties" value="3" />
           <entry key="SQL" value="5" />
-          <entry key="Scratch" value="8" />
+          <entry key="Scratch" value="9" />
           <entry key="XML" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="fxml" value="15" />
-          <entry key="java" value="13994" />
+          <entry key="java" value="14110" />
+          <entry key="md" value="76" />
           <entry key="properties" value="81" />
-          <entry key="sql" value="134" />
+          <entry key="sql" value="163" />
           <entry key="txt" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="13992" />
+          <entry key="JAVA" value="14108" />
+          <entry key="Markdown" value="76" />
           <entry key="PLAIN_TEXT" value="15" />
           <entry key="Properties" value="81" />
           <entry key="SQL" value="42" />
-          <entry key="Scratch" value="94" />
+          <entry key="Scratch" value="123" />
           <entry key="XML" value="15" />
         </counts>
       </usages-collector>
@@ -169,8 +169,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/AppointmentScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+            <state relative-caret-position="578">
+              <caret line="68" selection-start-line="68" selection-end-line="69" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#8152#8185#0" expanded="true" />
@@ -206,8 +206,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/ReportsController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+            <state relative-caret-position="782">
+              <caret line="148" column="8" selection-start-line="148" selection-start-column="8" selection-end-line="148" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -225,6 +225,27 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/fabfdf02-2488-42df-a646-778f93edb80a/console_4.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="31" selection-start-column="31" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ReadMe.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="90">
+                <caret line="6" column="73" selection-start-line="6" selection-start-column="73" selection-end-line="6" selection-end-column="73" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/LoginScreenController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2475">
@@ -237,20 +258,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/ReportsScreen.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/fabfdf02-2488-42df-a646-778f93edb80a/console_6.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="86" lean-forward="true" selection-end-column="86" />
+            <state relative-caret-position="30">
+              <caret line="2" column="50" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -272,16 +283,6 @@
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/AppointmentScreen.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="37" column="12" lean-forward="true" selection-end-line="43" />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
     </leaf>
@@ -330,12 +331,13 @@
         <option value="$PROJECT_DIR$/src/model/Appointment.java" />
         <option value="$PROJECT_DIR$/src/view/ReportsViewController.java" />
         <option value="$PROJECT_DIR$/src/view/ReportsScreen.fxml" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/fabfdf02-2488-42df-a646-778f93edb80a/console_6.sql" />
         <option value="$PROJECT_DIR$/src/view/AppointmentEditScreenController.java" />
         <option value="$PROJECT_DIR$/src/model/TypeCount.java" />
         <option value="$PROJECT_DIR$/src/view/CustomerController.java" />
         <option value="$PROJECT_DIR$/src/view/AppointmentScreen.java" />
         <option value="$PROJECT_DIR$/src/view/LoginScreenController.java" />
+        <option value="$PROJECT_DIR$/ReadMe.md" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/fabfdf02-2488-42df-a646-778f93edb80a/console_6.sql" />
         <option value="$PROJECT_DIR$/src/view/ReportsController.java" />
       </list>
     </option>
@@ -353,10 +355,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="12" />
-    <option name="y" value="23" />
-    <option name="width" value="1642" />
-    <option name="height" value="1027" />
+    <option name="x" value="-2548" />
+    <option name="y" value="-520" />
+    <option name="width" value="1489" />
+    <option name="height" value="1417" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -418,8 +420,8 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555298967852" />
-    <property name="database.console.LAST_STATE" value="false" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555321244356" />
+    <property name="database.console.LAST_STATE" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -462,7 +464,7 @@
       <workItem from="1553361938808" duration="786000" />
       <workItem from="1553608591386" duration="43927000" />
       <workItem from="1554410135360" duration="7150000" />
-      <workItem from="1555006698426" duration="37863000" />
+      <workItem from="1555006698426" duration="39663000" />
     </task>
     <task id="LOCAL-00001" summary="end of day">
       <created>1555188799244</created>
@@ -475,23 +477,23 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89726000" />
+    <option name="totallyTimeSpent" value="91526000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="12" y="23" width="1642" height="1027" extended-state="0" />
+    <frame x="-2548" y="-520" width="1489" height="1417" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49962264" visible="true" weight="0.224375" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49962264" visible="true" weight="0.24809952" />
       <window_info id="Structure" order="1" sideWeight="0.50037736" side_tool="true" weight="0.22991072" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Database Console" weight="0.32941177" />
+      <window_info anchor="bottom" id="Database Console" visible="true" weight="0.3290566" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32834226" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.30695188" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.30641508" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3989305" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -506,7 +508,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Database" order="5" visible="true" weight="0.225625" />
+      <window_info anchor="right" id="Database" order="5" visible="true" weight="0.2494817" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Maven Projects" order="8" weight="0.32962963" />
@@ -586,7 +588,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/view/ReportsController.java</url>
-          <line>36</line>
+          <line>76</line>
           <properties />
           <option name="timeStamp" value="16" />
         </line-breakpoint>
@@ -616,14 +618,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ReadMe.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -734,13 +728,6 @@
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/fabfdf02-2488-42df-a646-778f93edb80a/console_4.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="83" selection-end-column="347" />
         </state>
       </provider>
     </entry>
@@ -862,20 +849,6 @@
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="das://fabfdf02-2488-42df-a646-778f93edb80a/schema/U03Rt2/table/appointment">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/fabfdf02-2488-42df-a646-778f93edb80a/console_6.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="86" lean-forward="true" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/view/AppointmentScreen.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
@@ -890,34 +863,6 @@
           <caret line="81" column="53" selection-end-line="286" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/TypeCount.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="22" selection-end-line="30" />
-          <folding>
-            <element signature="e#104#105#0" expanded="true" />
-            <element signature="e#132#133#0" expanded="true" />
-            <element signature="e#175#176#0" expanded="true" />
-            <element signature="e#209#210#0" expanded="true" />
-            <element signature="e#240#241#0" expanded="true" />
-            <element signature="e#267#268#0" expanded="true" />
-            <element signature="e#307#308#0" expanded="true" />
-            <element signature="e#339#340#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/AppointmentScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#8152#8185#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -942,10 +887,69 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ReadMe.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="90">
+            <caret line="6" column="73" selection-start-line="6" selection-start-column="73" selection-end-line="6" selection-end-column="73" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/TypeCount.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="22" selection-end-line="30" />
+          <folding>
+            <element signature="e#104#105#0" expanded="true" />
+            <element signature="e#132#133#0" expanded="true" />
+            <element signature="e#175#176#0" expanded="true" />
+            <element signature="e#209#210#0" expanded="true" />
+            <element signature="e#240#241#0" expanded="true" />
+            <element signature="e#267#268#0" expanded="true" />
+            <element signature="e#307#308#0" expanded="true" />
+            <element signature="e#339#340#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/fabfdf02-2488-42df-a646-778f93edb80a/console_4.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="31" selection-start-column="31" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://fabfdf02-2488-42df-a646-778f93edb80a/schema/U03Rt2/table/appointment">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/fabfdf02-2488-42df-a646-778f93edb80a/console_6.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="50" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/AppointmentScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="68" selection-start-line="68" selection-end-line="69" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8152#8185#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/view/ReportsController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+        <state relative-caret-position="782">
+          <caret line="148" column="8" selection-start-line="148" selection-start-column="8" selection-end-line="148" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
