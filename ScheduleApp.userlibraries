@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="ScheduleApp" />
+  <library name="ScheduleApp1" />
+  <library name="ScheduleApp10" />
+  <library name="ScheduleApp11" />
+  <library name="ScheduleApp12" />
+  <library name="ScheduleApp13" />
+  <library name="ScheduleApp2" />
+  <library name="ScheduleApp3" />
+  <library name="ScheduleApp4" />
+  <library name="ScheduleApp5" />
+  <library name="ScheduleApp6" />
+  <library name="ScheduleApp7" />
+  <library name="ScheduleApp8" />
+  <library name="ScheduleApp9" />
+  <library name="mysql-connector-java-5.1.23-bin" />
+  <library name="mysql-connector-java-5.1.23-bin1" />
+  <library name="mysql-connector-java-5.1.23-bin10" />
+  <library name="mysql-connector-java-5.1.23-bin11" />
+  <library name="mysql-connector-java-5.1.23-bin12" />
+  <library name="mysql-connector-java-5.1.23-bin13" />
+  <library name="mysql-connector-java-5.1.23-bin2" />
+  <library name="mysql-connector-java-5.1.23-bin3" />
+  <library name="mysql-connector-java-5.1.23-bin4" />
+  <library name="mysql-connector-java-5.1.23-bin5" />
+  <library name="mysql-connector-java-5.1.23-bin6" />
+  <library name="mysql-connector-java-5.1.23-bin7" />
+  <library name="mysql-connector-java-5.1.23-bin8" />
+  <library name="mysql-connector-java-5.1.23-bin9" />
+  <library name="mysql-connector-java-5.1.45-bin">
+    <archive path="/Users/johnny.peterson/Downloads/C195UpdateExample/dist/lib/mysql-connector-java-5.1.45-bin.jar" />
+  </library>
+</eclipse-userlibraries>
+

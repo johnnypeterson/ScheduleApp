@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inherit-compiler-output="true" inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/out/test/ScheduleApp"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<levels>
+		<level name="mysql-connector-java-5.1.23-bin2" value="project"/>
+		<level name="mysql-connector-java-5.1.23-bin" value="project"/>
+		<level name="mysql-connector-java-5.1.23-bin7" value="project"/>
+		<level name="mysql-connector-java-5.1.23-bin4" value="project"/>
+		<level name="mysql-connector-java-5.1.23-bin5" value="project"/>
+		<level name="mysql-connector-java-5.1.23-bin9" value="project"/>
+		<level name="mysql-connector-java-5.1.23-bin12" value="project"/>
+		<level name="mysql-connector-java-5.1.23-bin6" value="project"/>
+		<level name="mysql-connector-java-5.1.23-bin10" value="project"/>
+		<level name="mysql-connector-java-5.1.23-bin3" value="project"/>
+		<level name="mysql-connector-java-5.1.23-bin1" value="project"/>
+		<level name="mysql-connector-java-5.1.23-bin8" value="project"/>
+		<level name="mysql-connector-java-5.1.23-bin11" value="project"/>
+		<level name="mysql-connector-java-5.1.23-bin13" value="project"/>
+		<level name="mysql-connector-java-5.1.45-bin" value="project"/>
+	</levels>
+</component>

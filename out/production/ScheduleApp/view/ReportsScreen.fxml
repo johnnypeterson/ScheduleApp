@@ -44,7 +44,7 @@
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab text="apt by City">
+    <Tab text="Apt by Title">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>

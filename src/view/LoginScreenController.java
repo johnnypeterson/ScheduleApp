@@ -82,6 +82,7 @@ public class LoginScreenController implements Initializable {
         alert.setTitle("Cancel");
         alert.setContentText("Are you sure you want to close the program");
 
+        // lambda to run on confirmation of exiting the program and close the program.
         alert.showAndWait()
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent((ButtonType response) -> {

@@ -206,28 +206,37 @@ public class AppointmentEditScreenController implements Initializable {
 
         Timestamp startTimeStamp = timeConvertor(date, startTime);
         Timestamp endTimeStamp = timeConvertor(date, endTime);
-        try {
-            PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
-                    "INSERT into appointment (customerId, contact, title, description, start, end, createdBy, createDate, lastUpdate, lastUpdateBy, location, url)" +
-                            "VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?)"
-            );
-            preparedStatement.setInt(1, customerTableView.getSelectionModel().getSelectedItem().getCustomerId());
-            preparedStatement.setString(2, customerTableView.getSelectionModel().getSelectedItem().getCustomerName());
-            preparedStatement.setString(3, titleTextField.getText());
-            preparedStatement.setString(4, descriptionTextField.getText());
-            preparedStatement.setTimestamp(5, startTimeStamp);
-            preparedStatement.setTimestamp(6, endTimeStamp);
-            preparedStatement.setString(7, currentUser.getUserName());
-            preparedStatement.setString(8, currentUser.getUserName());
-            preparedStatement.setString(9, "");
-            preparedStatement.setString(10, "");
 
-            System.out.println(preparedStatement);
-            Integer result = preparedStatement.executeUpdate();
+        if (hasValidAptTime(startTimeStamp, endTimeStamp)) {
+            try {
+                PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
+                        "INSERT into appointment (customerId, contact, title, description, start, end, createdBy, createDate, lastUpdate, lastUpdateBy, location, url)" +
+                                "VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?)"
+                );
+                preparedStatement.setInt(1, customerTableView.getSelectionModel().getSelectedItem().getCustomerId());
+                preparedStatement.setString(2, customerTableView.getSelectionModel().getSelectedItem().getCustomerName());
+                preparedStatement.setString(3, titleTextField.getText());
+                preparedStatement.setString(4, descriptionTextField.getText());
+                preparedStatement.setTimestamp(5, startTimeStamp);
+                preparedStatement.setTimestamp(6, endTimeStamp);
+                preparedStatement.setString(7, currentUser.getUserName());
+                preparedStatement.setString(8, currentUser.getUserName());
+                preparedStatement.setString(9, "");
+                preparedStatement.setString(10, "");
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            exceptionAlert(e);
+                System.out.println(preparedStatement);
+                Integer result = preparedStatement.executeUpdate();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                exceptionAlert(e);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Failed To Save");
+            alert.setContentText("The scheduled time conflicts with another apt.");
+            alert.showAndWait();
+
         }
     }
 
@@ -255,24 +264,32 @@ public class AppointmentEditScreenController implements Initializable {
 
         Timestamp startTimeStamp = timeConvertor(date, startTime);
         Timestamp endTimeStamp = timeConvertor(date, endTime);
-        try {
-            PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement("UPDATE appointment SET customerId = ?, title = ?, description = ?, start = ?, end = ?, lastUpdate = CURRENT_TIMESTAMP, lastUpdateBy = ? WHERE appointmentId = ?");
 
-            preparedStatement.setInt(1, customerTableView.getSelectionModel().getSelectedItem().getCustomerId());
-            preparedStatement.setString(2, titleTextField.getText());
-            preparedStatement.setString(3, descriptionTextField.getText());
-            preparedStatement.setTimestamp(4, startTimeStamp);
-            preparedStatement.setTimestamp(5, endTimeStamp);
-            preparedStatement.setString(6, currentUser.getUserName());
-            preparedStatement.setInt(7, currentAppointment.getAppointmentId());
+        if (hasValidAptTimeUpdate(startTimeStamp, endTimeStamp)) {
+            try {
+                PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement("UPDATE appointment SET customerId = ?, title = ?, description = ?, start = ?, end = ?, lastUpdate = CURRENT_TIMESTAMP, lastUpdateBy = ? WHERE appointmentId = ?");
+
+                preparedStatement.setInt(1, customerTableView.getSelectionModel().getSelectedItem().getCustomerId());
+                preparedStatement.setString(2, titleTextField.getText());
+                preparedStatement.setString(3, descriptionTextField.getText());
+                preparedStatement.setTimestamp(4, startTimeStamp);
+                preparedStatement.setTimestamp(5, endTimeStamp);
+                preparedStatement.setString(6, currentUser.getUserName());
+                preparedStatement.setInt(7, currentAppointment.getAppointmentId());
 
 
-            System.out.println(preparedStatement);
-            Integer result = preparedStatement.executeUpdate();
+                System.out.println(preparedStatement);
+                Integer result = preparedStatement.executeUpdate();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            exceptionAlert(e);
+            } catch (Exception e) {
+                e.printStackTrace();
+                exceptionAlert(e);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Failed To Save");
+            alert.setContentText("The scheduled time conflicts with another apt.");
+            alert.showAndWait();
         }
     }
 
@@ -282,5 +299,46 @@ public class AppointmentEditScreenController implements Initializable {
         alert.setTitle("Failed To Save");
         alert.setContentText("Unable to save with data provided." + e.toString());
         alert.showAndWait();
+    }
+
+
+    //exception check for saving new apt and confilicting apt times.  All based on UTc.
+    private boolean hasValidAptTime(Timestamp startTime, Timestamp endTime) {
+        try {
+            PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement("SELECT * FROM appointment WHERE (? BETWEEN start AND end OR ? BETWEEN start AND end OR ? < start AND ? > end) AND (createdBy = ?)");
+            preparedStatement.setTimestamp(1, startTime);
+            preparedStatement.setTimestamp(2, endTime);
+            preparedStatement.setTimestamp(3, startTime);
+            preparedStatement.setTimestamp(4, endTime);
+            preparedStatement.setString(5, currentUser.getUserName());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  true;
+
+    }
+    // check for conflicting apts when updating an apt.  I needed to add a check for apt id since the way I check for a new apt can return false since it didn't filter out the apt being updated.
+    private boolean hasValidAptTimeUpdate(Timestamp startTime, Timestamp endTime) {
+        try {
+            PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement("SELECT * FROM appointment WHERE (? BETWEEN start AND end OR ? BETWEEN start AND end OR ? < start AND ? > end) AND (createdBy = ? And appointmentId != ?)");
+            preparedStatement.setTimestamp(1, startTime);
+            preparedStatement.setTimestamp(2, endTime);
+            preparedStatement.setTimestamp(3, startTime);
+            preparedStatement.setTimestamp(4, endTime);
+            preparedStatement.setString(5, currentUser.getUserName());
+            preparedStatement.setInt(6, currentAppointment.getAppointmentId());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  true;
+
     }
 }

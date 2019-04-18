@@ -212,3 +212,15 @@ Apr 18, 2019 6:48:31 AM view.LoginScreenController loginLogger
 INFO: User test successfully logged in.
 Apr 18, 2019 6:52:48 AM view.LoginScreenController loginLogger
 INFO: Invalid UserName or Password.
+Apr 18, 2019 8:51:50 AM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 18, 2019 9:59:24 AM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 18, 2019 10:02:19 AM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 18, 2019 10:02:47 AM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 18, 2019 10:05:12 AM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
+Apr 18, 2019 10:09:57 AM view.LoginScreenController loginLogger
+INFO: User test successfully logged in.
