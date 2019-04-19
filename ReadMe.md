@@ -15,5 +15,6 @@ user1	user1,
 user2	user2,
 admin	admin
 
+* The appointment and edit apt views limit to only creating and editing apts. that belong to that user despite that not being a requirement.
 
-
+*  All times will show  based on the system time zone and are saved in the data base in "UTC".  to change time zone or login page language your system settings will need to change.
