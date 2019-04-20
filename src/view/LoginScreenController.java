@@ -92,7 +92,8 @@ public class LoginScreenController implements Initializable {
                 );
 
     }
-
+    // Method refactored from C195LoggerExample provide by course mentors
+    // success full logins are in log-ins.txt under /ScheduelApp
     private void loginLogger(User user) {
         Logger log = Logger.getLogger("log-ins.txt");
         log.setLevel(Level.INFO);
@@ -182,7 +183,7 @@ public class LoginScreenController implements Initializable {
 
     public void setLogin(ScheduleApp mainApp) {
         this.mainApp = mainApp;
-
+        // set default bundle will look for login_en unless system is changed to France.
         ResourceBundle resourcesBundle = ResourceBundle.getBundle("language/login");
 
         titleLabel.setText(resourcesBundle.getString("title"));
@@ -232,8 +233,9 @@ public class LoginScreenController implements Initializable {
                 LocalDateTime startTime = startTimeStamp.toLocalDateTime();
                 LocalDateTime endTime = endTimeStamp.toLocalDateTime();
                 String title = resultSet.getString("appointment.title");
-
-
+                
+                
+                // check for apt in the next 15 minutes if they exist add them to the remindersList.
                 if (startTime.isBefore(currentTime.plusMinutes(15)) && startTime.isAfter(currentTime)) {
                     Appointment appointment = new Appointment(appointmentId, title, startTime.toString(), endTime.toString());
                     remindersList.add(appointment);

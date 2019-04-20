@@ -128,6 +128,8 @@ public class CustomerController implements Initializable {
 
         }
     }
+    
+  
 
     private void updateCustomer(Customer customer) {
         City selectedCity = cityTableView.getSelectionModel().getSelectedItem();
@@ -293,7 +295,7 @@ public class CustomerController implements Initializable {
             alert.showAndWait();
         }
     }
-
+        //if try throws and exception I call this to let the user know the customer data is not valid.
     private void exceptionAlert(Exception e) {
         e.printStackTrace();
         Alert alert = new Alert(Alert.AlertType.WARNING);

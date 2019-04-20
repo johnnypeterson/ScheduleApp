@@ -111,6 +111,8 @@ public class AppointmentScreen implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete Appointment");
             alert.setHeaderText("Are you sure?");
+            //lambda to run method to delete apt once OK is selected.
+    
             alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> {
                 deleteAppointment(selectedAppointment);
                 showAppointments();
@@ -257,6 +259,7 @@ public class AppointmentScreen implements Initializable {
      */
     public ObservableList<Appointment> getAppointmentList() {
         ObservableList<Appointment> appointmentList = FXCollections.observableArrayList();
+        // Refactored code from 195PreparedStatementExample provided by course mentor.  
         try {
             PreparedStatement preparedStatement = DataBase.getConnection().prepareStatement(
                     "SELECT * From appointment WHERE createdBy = ? ");
