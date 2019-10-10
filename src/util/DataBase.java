@@ -19,7 +19,7 @@ import java.sql.SQLException;
 public class DataBase {
     
     private static final String databaseName = "U03Rt2";
-    private static final String DB_URL = "jdbc:mysql://52.206.157.109:3306/U03Rt2";
+    private static final String DB_URL = "jdbc:mysql://3.227.166.251:3306/U03Rt2";
     private static final String username = "U03Rt2";
     private static final String password = "53688060994";
     private static final String driver = "com.mysql.jdbc.Driver";
