@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="29d106f6-db13-4705-9a3d-c406a0e7381a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/com_google_guava_guava_14_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/junit_junit_4_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_hamcrest_hamcrest_junit_2_0_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_loadui_testFx_3_1_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_testfx_testfx_core_4_0_6_alpha.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_testfx_testfx_junit_4_0_6_alpha.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/scheduleapp/UserTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScheduleApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ScheduleApp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log-ins.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log-ins.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ScheduleApp/util/DataBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ScheduleApp/util/DataBase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DataBase.java" afterDir="false" />
-    </list>
+    <list default="true" id="29d106f6-db13-4705-9a3d-c406a0e7381a" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -288,7 +272,7 @@
       <workItem from="1555335197461" duration="1191000" />
       <workItem from="1555381159404" duration="3704000" />
       <workItem from="1555616810783" duration="4148000" />
-      <workItem from="1570646951905" duration="7449000" />
+      <workItem from="1570646951905" duration="7901000" />
     </task>
     <task id="LOCAL-00001" summary="end of day">
       <created>1555188799244</created>
@@ -304,7 +288,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570646651860</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="updates">
+      <created>1570734435695</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1570734435695</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
